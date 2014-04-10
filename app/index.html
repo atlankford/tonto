@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <title>OrderUpp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-startup-image" href="img/icons/114.png">
+    <link rel="apple-touch-icon" href="img/icons/57.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="img/icons/114.png"/>
+    <!--begin web app graphics-->
+    <!-- iPhone ICON -->
+    <link href="img/icons/57.png" sizes="57x57" rel="apple-touch-icon">
+    <!-- iPad ICON-->
+    <link href="img/icons/72.png" sizes="72x72" rel="apple-touch-icon">
+    <!-- iPhone (Retina) ICON-->
+    <link  href="img/icons/114.png" sizes="114x114" rel="apple-touch-icon">
+    <!-- iPad (Retina) ICON-->
+    <link href="img/icons/144.png" sizes="144x144" rel="apple-touch-icon">
+
+    <!-- iPhone SPLASHSCREEN-->
+    <link href="img/splash/320P.jpg" media="(device-width: 320px)" rel="apple-touch-startup-image">
+    <!-- iPhone (Retina) SPLASHSCREEN-->
+    <link href="img/splash/640P.jpg" media="(device-width: 320px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+    <!-- iPad (portrait) SPLASHSCREEN-->
+    <link href="img/splash/768P.jpg" media="(device-width: 768px) and (orientation: portrait)" rel="apple-touch-startup-image">
+    <!-- iPhone 5(Retina) SPLASHSCREEN-->
+    <link href="img/splash/640P@2x.jpg" rel="apple-touch-startup-image" sizes="640x1096">
+    <!-- iPad (landscape) SPLASHSCREEN-->
+    <link href="img/splash/1024L.jpg" media="(device-width: 768px) and (orientation: landscape)" rel="apple-touch-startup-image">
+    <!-- iPad (Retina, portrait) SPLASHSCREEN-->
+    <link href="img/splash/1536L.jpg" media="(device-width: 1536px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+    <!-- iPad (Retina, landscape) SPLASHSCREEN-->
+    <link href="img/splash/2048L.jpg" media="(device-width: 1536px)  and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+    <!--end web app graphics-->
+
+    <link rel="stylesheet" href="css/app.css"/>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Monoton' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Covered+By+Your+Grace' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/override.css"/>
+    <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+    <script src="https://cdn.firebase.com/v0/firebase-simple-login.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-route.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/0.6.0/angularfire.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="js/vendor/jquery.novacancy.min.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/routes.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/service.login.js"></script>
+    <script src="js/service.firebase.js"></script>
+    <script src="js/service.changeEmail.js"></script>
+    <script src="js/module.simpleLoginTools.js"></script>
+    <script src="js/module.routeSecurity.js"></script>
+    <script src="js/ui-bootstrap-tpls-0.10.0.js"></script>
+</head>
+<body ng-cloak>
+
+
+<div ng-view></div>
+
+</body>
+</html>

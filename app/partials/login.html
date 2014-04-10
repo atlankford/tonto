@@ -1,0 +1,33 @@
+<div ng-include="'partials/navbar.html'"></div>
+<div ng-controller="LoginCtrl">
+
+    <div class="logo-login">
+        <img src="img/logos/logo.png" class="login-logo" width="40%">
+
+        <!--<span id="no">Chomp</span>-->
+        <!--<span id="vacancy">Chomp</span>-->
+    </div>
+
+
+    <div class="container">
+
+        <form class="form-signin" role="form">
+            <p ng-show="err" class="error">{{err}}</p>
+            <h3 class="form-signin-heading">Please sign in</h3>
+            <input type="email" ng-model="email"  class="form-control" placeholder="Email address" required>
+            <input type="password" ng-model="pass" class="form-control" placeholder="Password" required>
+            <label ng-cloak ng-show="createMode">
+                <input type="password" class="form-control" placeholder="Confirm Password" type="password" ng-model="confirm" required/>
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" value="remember-me" ng-model="remember"> Remember me
+            </label>
+            <button class="btn btn-lg btn-success btn-block"  ng-click="login()" ng-hide="createMode" type="submit">Sign in</button>
+            <!--<button class="btn btn-lg btn-primary btn-block" ng-click="createMode = true" ng-hide="createMode">Register</button>-->
+            <!--<button class="btn btn-lg btn-primary btn-block" ng-cloak ng-show="createMode" ng-click="createAccount()">Create Account</button>-->
+            <!--<button class="btn btn-lg btn-primary btn-block" ng-cloak ng-show="createMode" ng-click="createMode = false">Cancel</button>-->
+        </form>
+
+    </div> <!-- /container -->
+
+</div>

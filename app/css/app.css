@@ -1,0 +1,625 @@
+/* app css stylesheet */
+
+.hide {
+    display: none;
+}
+
+.menu {
+    list-style: none;
+    border-bottom: 0.1em solid black;
+    margin-bottom: 2em;
+    padding: 0 0 0.5em;
+}
+
+.menu:before {
+    content: "[";
+}
+
+.menu:after {
+    content: "]";
+}
+
+.menu > li {
+    display: inline;
+}
+
+.menu > li.hide {
+    display: none;
+}
+
+.menu > li:before {
+    content: "|";
+    padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+    content: "";
+    padding: 0;
+}
+
+.login-name{
+    position: fixed;
+    bottom: 15px;
+    left: 20px;
+    font-size: 16px;
+    color:  #777;;
+}
+
+.log-out-button{
+    position: fixed;
+    bottom: 15px;
+    right: 20px;
+}
+
+
+form label {
+    display: block;
+    margin: 15px 0;
+}
+
+form label span {
+    display: block;
+    font-weight: bold;
+}
+
+.error {
+    color: red;
+}
+
+fieldset {
+    float: left;
+    margin-right: 25px;
+    padding: 25px;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+
+html, body{
+    height: 100%;
+}
+
+body {
+    background-color: #2e2e2d;
+    color: #9ac;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    padding-top: 50px;
+    padding-bottom: 40px;
+
+
+}
+
+/*start login style*/
+
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+.form-signin .checkbox {
+    font-weight: 300;
+}
+.form-signin .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+}
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #f5f5f5;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+    padding: 60px 15px 0;
+}
+.container .text-muted {
+    margin: 20px 0;
+}
+
+#footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+code {
+    font-size: 80%;
+}
+
+
+
+/*my custom styles*/
+
+.logo-login {
+    margin-top: 20px;
+    border: none;
+    width: 100%;
+    background-color: inherit;
+    text-align: center;
+}
+
+.board span {
+    font-size: 48px;
+    /*font-family: 'Monoton', cursive;*/
+
+    text-transform: uppercase;
+}
+
+/*Dashboard*/
+.dashboard{
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    padding: 5px;
+    color: #aec;
+}
+a.dashboard{
+    color: #9ac;
+}
+.dash{
+    margin-bottom: 50px;
+    font-size: 18px;
+}
+
+
+/*Order*/
+.menu-item-container{
+    display: inline-block;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.menu-item{
+    margin: 10px;
+    width: 100px;
+}
+
+
+.current-order-container{
+    position: relative;
+
+    margin-top: 40px;
+    /*background-color: #223358;*/
+    width: 100%;
+    height: 500px;
+    overflow-y: auto;
+}
+
+.customer-name{
+    width: 70%;
+    text-align: center;
+    font-size: 24px;
+    line-height: 1;
+    margin-bottom: 20px;
+    float: left;
+}
+
+.current-order{
+
+}
+
+.total-price{
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    font-size: 26px;
+
+}
+
+.order-table{
+    width:100%;
+    padding-bottom: 10px;
+    font-size: 16px;
+    color: #fffe0f;
+
+}
+
+.order-item-special{
+    width: 5%;
+    padding: 6px;
+}
+.order-item-name{
+    width: 90%;
+}
+.order-item-delete{
+    width: 5%;
+    padding: 6px;
+
+
+
+}
+.order-item-special-asterisk{
+    color:red;
+}
+
+.order-item-side{
+    color: #00c600;
+}
+td,table {
+    vertical-align: middle;
+    margin-bottom: 3px;
+    padding-right: 10px;
+
+}
+tr{
+    border: none;
+    padding: 3px;
+}
+
+
+.id,.customer,.item-name,.special,.item-up-button, .order-up-button{
+    width: 20%;
+    text-align: center;
+}
+
+.item-up-button{
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
+.order-up-button{
+    margin-left: 10px;
+    padding-bottom: 5px;
+    width: 190px;
+    height: 100px;
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+    font-size: 24px;
+
+
+}
+
+.special{
+    color: red;
+}
+
+.specialHeader{
+    text-align: center;
+}
+
+
+.orderContainer{
+
+    width: 98%;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+
+
+
+}
+.orderTable{
+    width: 90%;
+    padding-bottom: 10px;
+    text-align: left;
+    font-size: 20pt;
+}
+
+
+.orderHeader{
+    line-height: 1.3;
+}
+
+.display-menu{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    margin-top: 10px;
+}
+.menu-body{
+    height: 800px;
+    width: 100%;
+    background-color: #000;
+    position: fixed;
+    top:0px;
+}
+
+
+.menu tr{
+    border:none;
+}
+.name{
+    width: 30%;
+    font-size: 20pt;
+    font-family: 'Covered By Your Grace', cursive;
+    color: #0c69b9;
+}
+
+.description{
+    color: #b1c4eb;
+    font-size: 16px;
+
+}
+.price{
+    text-align: right;
+    color: #00BF86;
+    font-size: 16px;
+
+}
+.edit-menu{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    margin-top: 20px;
+    color: black;
+}
+
+
+.edit-menu input{
+    width: 300px;
+    background-color: #bdbdbd;
+    color: black;
+    border-radius: 3px;
+    border: black 1px solid;
+}
+
+
+.edit-name{
+    /*width: 30%;*/
+    /*font-size: 16px;*/
+    /*color: #1371b9;*/
+    text-align: center;
+}
+
+.edit-description{
+    /*color: #b1c4eb;*/
+    text-align: center;
+    /*font-size: 16px;*/
+}
+.edit-price{
+    text-align: center;
+    /*color: #00BF86;*/
+    /*font-size: 16px;*/
+
+}
+.edit-category{
+    text-align: center;
+}
+.edit-icon{
+    text-align: center;
+}
+.edit-class{
+    text-align: center;
+}
+.edit-shortname{
+    text-align: center;
+}
+
+
+.account{
+    margin-top: 30px;
+    width: 90%;
+}
+
+.modal {
+    display: block;
+
+}
+
+/* Custom dialog/modal headers */
+
+.dialog-header-error { background-color: #d2322d; }
+.dialog-header-wait { background-color: #428bca; }
+.dialog-header-notify { background-color: #eeeeee; }
+.dialog-header-confirm { background-color: #333333; }
+.dialog-header-error span, .dialog-header-error h4,
+.dialog-header-wait span, .dialog-header-wait h4,
+.dialog-header-confirm span, .dialog-header-confirm h4 { color: #ffffff; }
+
+/* Ease Display */
+
+.pad { padding: 25px; }
+
+.brand{
+    opacity:0.3;
+    filter:alpha(opacity=30); /* For IE8 and earlier */
+}
+
+.btn-success {
+    background-color: #00BF86;
+}
+.enable-print-checkbox{
+    position: fixed;
+    bottom: 10px;
+    right: 60px;
+}
+/*animate classes*/
+.animate-enter-setup {
+    -webkit-transition: 1s linear all; /* Safari/Chrome */
+    -moz-transition: 1s linear all; /* Firefox */
+    -ms-transition: 1s linear all; /* IE10 */
+    -o-transition: 1s linear all; /* Opera */
+    transition: 1s linear all; /* Future Browsers */
+
+    /* The animation preparation code */
+    opacity: 0;
+}
+
+/*
+ Keep in mind that you want to combine both CSS
+ classes together to avoid any CSS-specificity
+ conflicts
+*/
+.animate-enter-setup.animate-enter-start {
+    /* The animation code itself */
+    opacity: 1;
+}
+
+.menu-back-button{
+    position: fixed;
+    bottom:10px;
+    left: 10px;
+}
+.order-ticket{
+    height: 600px;
+    width: 220px;
+    background-color: #000;
+    float: right;
+    margin: 5px;
+    border: solid 1px #b1c4eb;
+    position: relative;
+}
+
+/*start kitchen display css*/
+.item-id{
+    font-size: 20px;
+    color: yellow;
+    text-align: left;
+    padding-left: 5px;
+}
+.item-togo{
+    font-size: 20px;
+    color: #ff7319;
+    text-align: right;
+    padding-right: 5px
+
+}
+.item-customer{
+
+    color: #b1c4eb;
+    font-size: 18px;
+    margin: 4px;
+    text-align: center;
+
+}
+
+.item-name{
+    width: 100%;
+    text-align: left;
+    font-size: 22px;
+    font-weight: 400;
+    color: #00BF86;
+    padding-left: 5px;
+}
+
+.item-side{
+    text-align: left;
+    color: #b1c4eb;
+    font-size: 20px;
+    padding-left: 5px;
+}
+
+.item-special{
+text-align: right;
+    color: red;
+    font-size:20px;
+    padding-right: 5px;
+}
+.line{
+    border-top: #b1c4eb solid 1px;
+    width: 220px;
+
+}
+
+.togo-button{
+    font-size: 80pt;
+}
+
+.submit-alert{
+    position: fixed;
+    width: 50%;
+    z-index: 1000;
+}
+.pad-mods{
+    margin: 5px;
+}
+
+#modString{
+    line-height: 1;
+    font-size: 24;
+    padding: 5px;
+    color: black;
+    width: 100%;
+}
+
+/*no vacancy*/
+.board {
+    text-align: center;
+    border-radius: 4px;
+    width: 500px;
+    margin: 50px auto 0 auto;
+    padding: 20px;
+    background-color: #000;
+}
+
+.board span {
+    font-size: 50px;
+    font-family: 'Monoton', cursive;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.edit-menu-accordian{
+   background-color: #2e2e2d;
+}
+
+.panel-heading{
+    background-color: #2e2e2d;
+}
+
+/*menu classes*/
+.red{
+    color: #F04A4A;
+}
+.green{
+    color: #6BF670;
+}
+
+.purple{
+    color: #776CBF;
+}
+
+.orange{
+    color: #F15F49;
+}
+
+.yellow{
+    color: #FDFF3A;
+}

@@ -1,0 +1,29 @@
+html, body{
+    height: 100%;
+    width: 100%;
+}
+
+.nav, .navbar, .navbar-default, body, input{
+background-color: #414140;
+color: #b1c4eb;
+border: #414140;
+
+}
+.brand{
+    opacity:0.3;
+    filter:alpha(opacity=30); /* For IE8 and earlier */
+}
+
+.btn-success {
+    background-color: #00BF86;
+}
+
+legend{
+    color: #b1c4eb:
+}
+
+.menu-back-button{
+    position: fixed;
+    bottom:10px;
+    left: 10px;
+}

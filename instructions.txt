@@ -1,0 +1,2 @@
+Import app folder into IDE.
+You also need to upload node.js.
