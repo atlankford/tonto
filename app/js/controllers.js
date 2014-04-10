@@ -87,7 +87,7 @@ angular.module('myApp.controllers', [])
 
     .controller('CustomerViewCtrl', ['$scope', 'loginService', '$location', function($scope, loginService, $location) {
 
-        var ref = new Firebase('https://orderupp.firebaseio.com/LOCATION/1/ACTIVE_ORDER');
+        var ref = new Firebase('https://tonto.firebaseio.com/LOCATION/1/ACTIVE_ORDER');
 
 
         var canvas = document.getElementById("myCanvas");
@@ -433,15 +433,11 @@ angular.module('myApp.controllers', [])
 
     .controller('KitchenCtrl', ['$scope', '$firebase', 'FBURL', function($scope, $firebase, FBURL) {
 
-//        //binds scope.orders to database orderItems
-//        syncData('OrderItems').$bind($scope, 'orders');
-        $scope.print = false;
-
-        var ref = new Firebase('https://orderupp.firebaseio.com');
+        var ref = new Firebase('https://tonto.firebaseio.com');
 
         var active_ordersRef = ref.child('LOCATION/1/ACTIVE_ORDER');
 
-//        var ordersRef = ref.parent().child('Orders');
+        $scope.orders = $firebase(active_ordersRef);
 
         var lastOrderIDRef = ref.child('LOCATION/1/LAST_ORDER_ID');
 
@@ -449,7 +445,7 @@ angular.module('myApp.controllers', [])
         var initTrigger = true;
         var printRef;
 
-        $scope.limit = 6;
+        $scope.print = false;
 
 
         lastOrderIDRef.on('value', function(lastIDOrderSnapshot)
@@ -477,6 +473,7 @@ angular.module('myApp.controllers', [])
 
                     printRef.once('value', function(orderSnapshot)
                     {
+                        popUp.document.writeln(orderSnapshot.child('togo').val() + "<br/>");
                         popUp.document.writeln("Customer: " + orderSnapshot.child('customer').val() + "<br/>");
                         popUp.document.writeln("Time: " + orderSnapshot.child('time').val() + "<br/></br></br>");
 
@@ -495,7 +492,7 @@ angular.module('myApp.controllers', [])
             })
 
 
-        $scope.orders = $firebase(active_ordersRef);
+//
 
         $scope.deleteItem = function (x) {
             var itemRef = active_ordersRef.child(x);
@@ -540,7 +537,7 @@ angular.module('myApp.controllers', [])
     .controller('KitchenTouchCtrl', ['$scope', '$firebase', 'FBURL', function($scope, $firebase, FBURL) {
 
 
-        var ref = new Firebase('https://orderupp.firebaseio.com');
+        var ref = new Firebase('https://tonto.firebaseio.com');
 
         var active_ordersRef = ref.child('LOCATION/1/ACTIVE_ORDER');
         var archive_ordersRef = ref.child('LOCATION/1/ARCHIVE_ORDER');
@@ -553,7 +550,7 @@ angular.module('myApp.controllers', [])
 
             // -5 in date construction string represents GMT -5 (Eastern Standard Time)
             archive_ordersRef.child(x).set({customer: item.customer, id: item.id, price: item.price, time_submitted: item.time,
-                time_served: new Date( new Date().getTime() - 5 * 3600 * 1000).toUTCString().replace( / GMT$/, "" ), status: "served", togo: item.togo
+                time_served: new Date( new Date().getTime() - 4 * 3600 * 1000).toUTCString().replace( / GMT$/, "" ), status: "served", togo: item.togo
             })
 
 //            angular.forEach(item.ITEM,function(item,x)
@@ -604,7 +601,7 @@ angular.module('myApp.controllers', [])
 .controller('OrderCtrl', ['$scope', '$firebase', 'FBURL','syncData', '$modal', '$log', 'firebaseRef', function($scope, $firebase, FBURL, syncData, $modal, $log, firebaseRef)
     {
     //Get Root Ref
-    var ref = new Firebase("https://orderupp.firebaseio.com/");
+    var ref = new Firebase("https://tonto.firebaseio.com/");
 
     //3 way bind scope.menu to MENU table
     syncData('LOCATION/1/MENU_ITEM').$bind($scope, 'menu');
@@ -674,7 +671,7 @@ angular.module('myApp.controllers', [])
 
                 // -5 in date construction string represents GMT -5 (Eastern Standard Time)
                 active_ordersRef.child(orderID).set({customer: $scope.customer, id: orderID, price: $scope.total_price,
-                time: new Date( new Date().getTime() - 5 * 3600 * 1000).toUTCString().replace( / GMT$/, "" ), status: "submitted", togo: setTogo })
+                time: new Date( new Date().getTime() - 4 * 3600 * 1000).toUTCString().replace( / GMT$/, "" ), status: "submitted", togo: setTogo })
 
 
                 angular.forEach($scope.current_order,function(item,index)
@@ -686,9 +683,9 @@ angular.module('myApp.controllers', [])
                 $scope.total_price= 0.00;
                 $scope.current_order = [ ];
                 $scope.customer = "";
-//            $scope.addAlert().fadeOut;
-            $scope.togo ="";
 
+            $scope.togo ="";
+            setTogo="";
 
             }
         }

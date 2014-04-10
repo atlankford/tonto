@@ -18,7 +18,7 @@
                     <div class="current-order"  ng-repeat="item in current_order">
                         <table class="order-table">
                             <tr class="order-row">
-                                <td class="order-item-name">{{item.name}} <span ng-if="item.side" class="order-item-side">//{{item.side}}</span> <span class="order-item-special-asterisk "ng-if="item.special">*</span></td>
+                                <td class="order-item-name">{{item.name}} <span ng-if="item.side  && item.name != 'Side chips'" class="order-item-side">//{{item.side}}</span> <span class="order-item-special-asterisk "ng-if="item.special">*</span></td>
                                 <td class="order-item-special "><button class="btn btn-lg btn-info pull-right" ng-click="open(item)"><i class="fa fa-plus"></i></button> </td>
                                 <td class="order-item-delete "><button class="btn  btn-lg btn-danger" ng-click="deleteItem($index,item)"><i class="fa fa-trash-o"></i></button></td>
                             </tr>

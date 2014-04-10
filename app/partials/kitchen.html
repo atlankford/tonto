@@ -22,7 +22,7 @@
                     <p class="item-name" >{{i.name}}</p>
                     <div class="row">
                         <div class="col-md-6">
-                            <p class="item-side"> {{i.side}}</p>
+                            <p class="item-side" ng-if="i.name != 'Side chips'"> {{i.side}}</p>
                         </div>
                         <div class="col-md-6">
                             <p class="item-special">{{i.special}}</p>
