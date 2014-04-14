@@ -13,7 +13,7 @@
          </thead>
 
 
-         <tr ng-repeat="row in archiveItems">
+         <tr ng-repeat="row in archiveItems | orderBy: row.id:reverse | limitTo: 20">
              <td class="archive-table-col">{{row.id}}</td>
              <td class="archive-table-col">{{row.customer}}</td>
              <td class="archive-table-col">{{row.time_submitted}}</td>

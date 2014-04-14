@@ -604,7 +604,7 @@ angular.module('myApp.controllers', [])
         var ref = new Firebase('https://orderupp.firebaseio.com');
 
         var active_ordersRef = ref.child('LOCATION/1/ACTIVE_ORDER');
-        var archive_ordersRef = ref.child('LOCATION/1/ARCHIVE_ORDER');
+        var archive_ordersRef = ref.child('LOCATION/1/ARCHIVE_ORDER').limit(20);
 
         $scope.orders = $firebase(active_ordersRef);
         $scope.archiveItems = $firebase(archive_ordersRef);
