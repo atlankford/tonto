@@ -1,0 +1,36 @@
+<div ng-include="'partials/navbar.html'"></div>
+<div ng-controller="ArchiveCtrl">
+ <div class="archive-table">
+     <div class="table table-responsive">
+      <table >
+         <thead>
+         <th class="archive-table-col">Order ID</th>
+         <th class="archive-table-col">Customer</th>
+         <th class="archive-table-col">Time In</th>
+         <th class="archive-table-col">Time Out</th>
+         <th class="archive-table-col">Items</th>
+         <th class="archive-table-col">Recall?</th>
+         </thead>
+
+
+         <tr ng-repeat="row in archiveItems">
+             <td class="archive-table-col">{{row.id}}</td>
+             <td class="archive-table-col">{{row.customer}}</td>
+             <td class="archive-table-col">{{row.time_submitted}}</td>
+             <td class="archive-table-col">{{row.time_served}}</td>
+             <td class="archive-table-col">
+                 <ol>
+                     <li ng-repeat="i in row.ITEM" ng-if="$index != 0">{{i.name}} // {{i.side}} <p ng-if="i.side != ''"> {{i.special}}</p></li>
+                 </ol>
+             </td>
+             <td class="order-item-delete archive-table-col"><button class="btn  btn-lg btn-success" ng-click="archiveItem(key,item)"><i class="fa fa-external-link"></i></button></td>
+         </tr>
+
+          </table>
+     </div>
+
+
+
+ </div>
+
+</div>

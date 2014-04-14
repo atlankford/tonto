@@ -623,3 +623,25 @@ text-align: right;
 .yellow{
     color: #FDFF3A;
 }
+
+
+.archive-table{
+    background-color: white;
+    color: black;
+    width: 100%;
+}
+
+.archive-table td{
+  width: 20%;
+    border: 1px #ccc solid;
+}
+.archive-table th{
+    width: 20%;
+    border: 1px #ccc solid;
+}
+
+.archive-table-col{
+    width: 20%;
+    border: 1px #ccc solid;
+    text-align: center;
+}

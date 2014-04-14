@@ -59,7 +59,10 @@ angular.module('myApp.routes', ['ngRoute'])
             templateUrl: 'partials/kitchen-touch.html'
 
         });
+        $routeProvider.when('/archive', {
+            templateUrl: 'partials/archived-orders.html'
 
+        });
 
         $routeProvider.otherwise({redirectTo: '/dashboard'});
     }]);
