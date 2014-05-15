@@ -13,7 +13,15 @@
             <div class="col-md-5 col-lg-5 col-sm-5 col-xs-5">
 
                 <div class="current-order-container">
-                    <input placeholder="Add Name" ng-model="customer" class="customer-name" id="custName" type="text" value="">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input placeholder="Add Name" ng-model="customer" class="customer-name" id="custName" type="text" value="">
+                        </div>
+                        <div class="col-md-6">
+                            <input placeholder="Add Phone" ng-model="phone" class="customer-name" id="phone" type="number" value="">
+                        </div>
+
+                    </div>
                     <input class="togo-button pull-right" type="checkbox" ng-model="togo"><label class="pull-right">TO-GO?</label>
                     <div class="current-order"  ng-repeat="item in current_order">
                         <table class="order-table">
