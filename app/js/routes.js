@@ -63,6 +63,10 @@ angular.module('myApp.routes', ['ngRoute'])
             templateUrl: 'partials/archived-orders.html'
 
         });
+        $routeProvider.when('/submitted', {
+            templateUrl: 'partials/submitted.html'
 
-        $routeProvider.otherwise({redirectTo: '/dashboard'});
+        });
+
+        $routeProvider.otherwise({redirectTo: '/order'});
     }]);

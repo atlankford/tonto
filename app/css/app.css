@@ -46,9 +46,10 @@
 }
 
 .log-out-button{
-    position: fixed;
-    bottom: 15px;
-    right: 20px;
+   position: fixed;
+   bottom: 15px;
+   margin: 0 auto;
+   width: 90%;
 }
 
 
@@ -86,7 +87,7 @@ body {
     color: #9ac;
     font-family: 'Lato', sans-serif;
     font-weight: 300;
-    padding-top: 50px;
+
     padding-bottom: 40px;
 
 
@@ -215,8 +216,8 @@ a.dashboard{
 }
 
 .menu-item{
-    margin: 10px;
-    width: 100px;
+    margin: 5px;
+    width: 90px;
 }
 
 
@@ -255,7 +256,7 @@ a.dashboard{
     width:100%;
     padding-bottom: 10px;
     font-size: 16px;
-    color: #fffe0f;
+
 
 }
 
@@ -278,7 +279,7 @@ a.dashboard{
 }
 
 .order-item-side{
-    color: #00c600;
+    color: #009d70;
 }
 td,table {
     vertical-align: middle;

@@ -23,7 +23,7 @@ angular.module('myApp.controllers', [])
         };
     }])
 
-    .controller('LoginCtrl', ['$scope', 'loginService', '$location', function($scope, loginService, $location) {
+    .controller('LoginCtrl', ['$rootScope','$scope', 'loginService', '$location', function($rootScope,$scope, loginService, $location) {
         $scope.email = null;
         $scope.pass = null;
         $scope.confirm = null;
@@ -47,6 +47,37 @@ angular.module('myApp.controllers', [])
                     }
                 });
             }
+
+        };
+
+        $scope.fbLogin =function(cb){
+            loginService.fbLogin(function(err, user) {
+                $scope.err = err? err + '' : null;
+                if( !err ) {
+                    cb && cb(user);
+                }
+            });
+
+        };
+
+        $scope.googLogin =function(cb){
+            loginService.googLogin(function(err, user) {
+                $scope.err = err? err + '' : null;
+                if( !err ) {
+                    cb && cb(user);
+                }
+            });
+
+        };
+
+        $scope.twitLogin =function(cb){
+            loginService.twitLogin(function(err, user) {
+                $scope.err = err? err + '' : null;
+                if( !err ) {
+                    cb && cb(user);
+                }
+            });
+
         };
 
         $scope.createAccount = function() {
@@ -434,7 +465,7 @@ angular.module('myApp.controllers', [])
 
     .controller('KitchenCtrl', ['$scope', '$firebase', 'FBURL', function($scope, $firebase, FBURL) {
 
-        var ref = new Firebase('https://orderupp.firebaseio.com');
+        var ref = new Firebase('https://tonto.firebaseio.com');
 
         var active_ordersRef = ref.child('LOCATION/1/ACTIVE_ORDER');
 
@@ -538,7 +569,7 @@ angular.module('myApp.controllers', [])
     .controller('KitchenTouchCtrl', ['$scope', '$firebase', 'FBURL', function($scope, $firebase, FBURL) {
 
 
-        var ref = new Firebase('https://orderupp.firebaseio.com');
+        var ref = new Firebase('https://tonto.firebaseio.com');
 
         var active_ordersRef = ref.child('LOCATION/1/ACTIVE_ORDER');
         var archive_ordersRef = ref.child('LOCATION/1/ARCHIVE_ORDER');
@@ -601,10 +632,10 @@ angular.module('myApp.controllers', [])
     .controller('ArchiveCtrl', ['$scope', '$firebase', 'FBURL', function($scope, $firebase, FBURL) {
 
 
-        var ref = new Firebase('https://orderupp.firebaseio.com');
+        var ref = new Firebase('https://tonto.firebaseio.com');
 
         var active_ordersRef = ref.child('LOCATION/1/ACTIVE_ORDER');
-        var archive_ordersRef = ref.child('LOCATION/1/ARCHIVE_ORDER').limit(20);
+        var archive_ordersRef = ref.child('LOCATION/1/ARCHIVE_ORDER').limit(10);
 
         $scope.orders = $firebase(active_ordersRef);
         $scope.archiveItems = $firebase(archive_ordersRef);
@@ -628,10 +659,10 @@ angular.module('myApp.controllers', [])
     }])
 
 
-    .controller('OrderCtrl', ['$scope', '$firebase', 'FBURL','syncData', '$modal', '$log', 'firebaseRef', function($scope, $firebase, FBURL, syncData, $modal, $log, firebaseRef)
+    .controller('OrderCtrl', ['$rootScope','$scope', '$firebase', 'FBURL','syncData', '$modal', '$log', 'firebaseRef', 'loginService', '$location', function($rootScope, $scope, $firebase, FBURL, syncData, $modal, $log, firebaseRef, loginService, $location)
     {
     //Get Root Ref
-    var ref = new Firebase("https://orderupp.firebaseio.com/");
+    var ref = new Firebase("https://tonto.firebaseio.com/");
 
     //3 way bind scope.menu to MENU table
     syncData('LOCATION/1/MENU_ITEM').$bind($scope, 'menu');
@@ -641,8 +672,9 @@ angular.module('myApp.controllers', [])
 
         $scope.current_order = [];
         $scope.total_price = 0.00;
-        $scope.togo = false;
-        var setTogo ="";
+        $scope.countItems = 0;
+
+
 
         //Get Last Order ID from Firebase and add 1 for Order ID (every time the value changes) - Multiuser System
         var orderID;
@@ -667,8 +699,9 @@ angular.module('myApp.controllers', [])
         {
             $scope.current_order.push({name: x.name, description: x.description, price: x.price,
                 special: x.special, category: x.category, side: 'Chips', class: x.class});
-            console.log("current order is :" + $scope.current_order);
-            $scope.total_price = $scope.total_price + parseFloat(x.price);
+            console.log("current order is :" +    $scope.current_order);
+            $scope.total_price =    $scope.total_price + parseFloat(x.price);
+            $scope.countItems++;
         }
 
 
@@ -683,25 +716,17 @@ angular.module('myApp.controllers', [])
         {
 
 
-            if(!$scope.customer)
-            {
-                alert("Please enter a name for the order.");
-            }
-            else if(!$scope.current_order.length)
+
+            if(!$scope.current_order.length)
             {
                 alert("Please enter items for the order.");
             }
             else
             {
 
-      if($scope.togo)
-      {
-           setTogo = "TO-GO";
-      }
-
                 // -5 in date construction string represents GMT -5 (Eastern Standard Time)
-                active_ordersRef.child(orderID).set({customer: $scope.customer, id: orderID, price: $scope.total_price,
-                time: new Date( new Date().getTime() - 4 * 3600 * 1000).toUTCString().replace( / GMT$/, "" ), status: "submitted", togo: setTogo })
+                active_ordersRef.child(orderID).set({customer: $scope.userName, id: orderID, price:   $scope.total_price,
+                time: new Date( new Date().getTime() - 4 * 3600 * 1000).toUTCString().replace( / GMT$/, "" ), status: "submitted", togo: "Online" })
 
 
                 angular.forEach($scope.current_order,function(item,index)
@@ -712,17 +737,21 @@ angular.module('myApp.controllers', [])
                 lastOrderIDRef.set(orderID);
                 $scope.total_price= 0.00;
                 $scope.current_order = [ ];
-                $scope.customer = "";
+                $scope.countItems = 0;
 
-            $scope.togo ="";
-            setTogo="";
+                $location.path('/submitted');
 
             }
         }
 
 
         $scope.sides = ['No Side', 'Chips', 'Salad', 'Salad Style'];
-        $scope.modItems = ['cheez ','ched ','jack ','BC ','cucum ','fried ','onion ','peprs ', 'carot ', 'slaw ', 'sauce ', 'bun ', 'rare ', 'mdrar ', 'med ', 'well ', 'plain ', 'letuc ', 'tom ', 'tofu ', 'salVg ', 'balVg ', 'soyVg ', 'appVg ', 'cut.5 ', 'apple ', 'pork ', 'chckn ', 'jerk ', 'aioli ', 'grens ', 'spicy ', 'ltspc ', 'vegan ', 'grOns ', 'frdPO ', 'mayo ', 'mustd ', 'nut ', 'peanut ', 'kmchi ', 'pnapp ', 'grEgg'];
+        $scope.modItems = ['cheez ','ched ','jack ','BC ','cucum ','fried ','onion ',
+            'peprs ', 'carot ', 'slaw ', 'sauce ', 'bun ', 'rare ', 'mdrar ', 'med ',
+            'well ', 'plain ', 'letuc ', 'tom ', 'tofu ', 'salVg ', 'balVg ', 'soyVg ',
+            'appVg ', 'cut.5 ', 'apple ', 'pork ', 'chckn ', 'jerk ', 'aioli ', 'grens ',
+            'spicy ', 'ltspc ', 'vegan ', 'grOns ', 'frdPO ', 'mayo ', 'mustd ', 'nut ',
+            'peanut ', 'kmchi ', 'pnapp ', 'grEgg'];
         $scope.modTypes = ['86: ', 'ADD: ', 'SUB: ', 'OTS: '];
         $scope.modString = "";
 
@@ -790,81 +819,14 @@ angular.module('myApp.controllers', [])
     }])
 
     .controller('AccountCtrl', ['$scope', 'loginService', 'changeEmailService', 'firebaseRef', 'syncData', '$location', 'FBURL', function($scope, loginService, changeEmailService, firebaseRef, syncData, $location, FBURL) {
-        $scope.syncAccount = function() {
-            $scope.user = {};
-            syncData(['users', $scope.auth.user.uid]).$bind($scope, 'user').then(function(unBind) {
-                $scope.unBindAccount = unBind;
-            });
-        };
-        // set initial binding
-        $scope.syncAccount();
+
 
         $scope.logout = function() {
             loginService.logout();
+            $location.path('/');
         };
 
-        $scope.oldpass = null;
-        $scope.newpass = null;
-        $scope.confirm = null;
 
-        $scope.reset = function() {
-            $scope.err = null;
-            $scope.msg = null;
-            $scope.emailerr = null;
-            $scope.emailmsg = null;
-        };
-
-        $scope.updatePassword = function() {
-            $scope.reset();
-            loginService.changePassword(buildPwdParms());
-        };
-
-        $scope.updateEmail = function() {
-            $scope.reset();
-            // disable bind to prevent junk data being left in firebase
-            $scope.unBindAccount();
-            changeEmailService(buildEmailParms());
-        };
-
-        function buildPwdParms() {
-            return {
-                email: $scope.auth.user.email,
-                oldpass: $scope.oldpass,
-                newpass: $scope.newpass,
-                confirm: $scope.confirm,
-                callback: function(err) {
-                    if( err ) {
-                        $scope.err = err;
-                    }
-                    else {
-                        $scope.oldpass = null;
-                        $scope.newpass = null;
-                        $scope.confirm = null;
-                        $scope.msg = 'Password updated!';
-                    }
-                }
-            };
-        }
-        function buildEmailParms() {
-            return {
-                newEmail: $scope.newemail,
-                pass: $scope.pass,
-                callback: function(err) {
-                    if( err ) {
-                        $scope.emailerr = err;
-                        // reinstate binding
-                        $scope.syncAccount();
-                    }
-                    else {
-                        // reinstate binding
-                        $scope.syncAccount();
-                        $scope.newemail = null;
-                        $scope.pass = null;
-                        $scope.emailmsg = 'Email updated!';
-                    }
-                }
-            };
-        }
 
 
 
