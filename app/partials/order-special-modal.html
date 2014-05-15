@@ -8,17 +8,19 @@
         <!--<pre>{{ selected.side }}</pre>-->
 
         <div class="btn-group btn-group-lg">
+            <h4>Choose a side: {{selected.side}}</h4>
             <button type="button " ng-repeat="side in sides" class="btn btn-primary" ng-click="selected.side = side">{{ side }}</button>
         </div>
         <hr/>
+        <h4>Special Instructions: {{ selected.modString }}</h4>
         <textarea rows="4" ng-model="selected.modString" id="modString">{{ selected.modString }}</textarea>
-        <div class="btn-group btn-group-lg">
-            <button type="button" ng-repeat="type in modTypes" class="btn btn-warning" ng-click="selected.modString = selected.modString + type">{{ type }}</button>
-        </div>
-        <hr/>
-        <div class="btn-group ">
-            <button type="button" ng-repeat="item in modItems | orderBy: 'toString()'" class="btn btn-primary pad-mods" ng-click="selected.modString = selected.modString + item">{{ item }}</button>
-        </div>
+        <!--<div class="btn-group btn-group-lg">-->
+            <!--<button type="button" ng-repeat="type in modTypes" class="btn btn-warning" ng-click="selected.modString = selected.modString + type">{{ type }}</button>-->
+        <!--</div>-->
+        <!--<hr/>-->
+        <!--<div class="btn-group ">-->
+            <!--<button type="button" ng-repeat="item in modItems | orderBy: 'toString()'" class="btn btn-primary pad-mods" ng-click="selected.modString = selected.modString + item">{{ item }}</button>-->
+        <!--</div>-->
 
 
         <!--<div class="btn-group btn-input clearfix">

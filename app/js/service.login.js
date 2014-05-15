@@ -35,6 +35,39 @@ angular.module('myApp.service.login', ['firebase', 'myApp.service.firebase'])
                auth.$logout();
             },
 
+            fbLogin: function(callback){
+                assertAuth();
+                auth.$login('facebook')
+                    .then(function(user) {
+                        if( callback ) {
+                            callback(null, user);
+                        }
+                  $rootScope.userName = user.displayName;
+                    }, callback);
+            },
+
+             googLogin: function(callback){
+                 assertAuth();
+                 auth.$login('goog')
+                     .then(function(user) {
+                         if( callback ) {
+                             callback(null, user);
+                         }
+                         $rootScope.userName = user.displayName;
+                     }, callback);
+             },
+
+             twitLogin: function(callback){
+                 assertAuth();
+                 auth.$login('twitter')
+                     .then(function(user) {
+                         if( callback ) {
+                             callback(null, user);
+                         }
+                         $rootScope.userName = user.displayName;
+                     }, callback);
+             },
+
             changePassword: function(opts) {
                assertAuth();
                var cb = opts.callback || function() {};

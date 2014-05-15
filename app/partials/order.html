@@ -1,39 +1,94 @@
-<div ng-include="'partials/navbar.html'"></div>
+
 <div ng-controller="OrderCtrl">
+
+    <!--<ul class="nav nav-tabs nav-justified">-->
+    <!--<li ><a href="#/order">Order </a></li>-->
+    <!--<li class="active"><a href="#/order-payment">Payment ${{total_price}}</a></li>-->
+    <!--<li><a href="#/order-submit">Review</a></li>-->
+    <!--</ul>-->
     <div class="container">
-        <!--<alert class="submit-alert" ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>-->
-        <div class="row">
-            <div class="col-md-7 col-lg-7 col-sm-7 col-xs-7 ">
-                <div class="menu-item-container" ng-repeat="menuItem in menu">
-                    <a class="btn btn-primary menu-item" ng-click="addItem(menuItem)" ng-model="menuItem">
-                        <i class="{{menuItem.icon}} fa-2x"></i><br> {{menuItem.shortname}}</a>
+    <tabset justified="true">
+        <tab heading="1. Add Items">
+
+            <accordion close-others="oneAtATime">
+
+                <accordion-group  heading="{{menuItem.name}}  ${{menuItem.price}} " ng-repeat="(key,menuItem) in menu">
+                    <div class="row">
+
+                        <div class="col-md-12" style="color:black">
+                            <p><b>{{menuItem.name}}</b></p>
+                            <p>{{menuItem.description}}</p>
+                            <p>{{menuItem.price}}</p>
+                        </div>
+                        </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                                <button class="btn btn-lg btn-success pull-right" ng-click="addItem(menuItem)"><i class="fa fa-plus"></i>Add Item</button>
+                        </div>
+                    </div>
+
+
+                </accordion-group>
+
+            </accordion>
+
+
+
+
+
+        </tab>
+        <tab heading="2. Enter Payment ${{total_price}}">
+      <h3>${{total_price}}</h3>
+<div class="col-md-8">
+    <ul>
+        <li ng-show="form.number.$error.cardNumber">invalid number</li>
+        <li ng-show="form.cvc.$error.cardCVC">invalid cvc</li>
+        <li ng-show="form.expiry.$error.cardExpiry">invalid expiry</li>
+    </ul>
+            <form name="form" role="form">
+                <div class="form-group">
+                    <label>Card Number</label>
+                    <input class="form-control" type="text" name="number" ng-model="card.number" format-card-number card-number restrict-numeric/>
                 </div>
+                <div class="form-group">
+                    <label>CVC</label>
+                    <input class="form-control"  type="text" name="cvc" ng-model="card.cvc" format-card-cvc card-cvc restrict-numeric/>
+                </div>
+                <div class="form-group">
+                    <label>Expiry</label>
+                    <input class="form-control"  type="text" name="expiry" ng-model="card.expiry" format-card-expiry card-expiry restrict-numeric/>
+                </div>
+            </form>
+</div>
+
+        </tab>
+        <tab heading="3. Review and Submit {{countItems}}">
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                    <h4>Name:{{userName}}</h4>
+
+                    <div class="current-order-container">
+
+                        <div class="current-order"  ng-repeat="item in current_order">
+                            <table class="order-table">
+                                <tr class="order-row">
+                                    <td class="order-item-name">{{item.name}} <span ng-if="item.side  && item.name != 'Side chips'" class="order-item-side">//{{item.side}}</span> <span class="order-item-special-asterisk "ng-if="item.special">*</span></td>
+                                    <td class="order-item-special "><button class="btn btn-lg btn-info pull-right" ng-click="open(item)"><i class="fa fa-plus"></i></button> </td>
+                                    <td class="order-item-delete "><button class="btn  btn-lg btn-danger" ng-click="deleteItem($index,item)"><i class="fa fa-trash-o"></i></button></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <button value="submit" ng-model="currentOrder" class="btn btn-success submit" ng-click="addOrder()">Submit</button>
+
+                    </div>
+                </div>
+                <div ng-include="'partials/order-special-modal.html'"></div>
             </div>
 
-            <div class="col-md-5 col-lg-5 col-sm-5 col-xs-5">
+        </tab>
+    </tabset>
 
-                <div class="current-order-container">
-                    <input placeholder="Add Name" ng-model="customer" class="customer-name" id="custName" type="text" value="">
-                    <input class="togo-button pull-right" type="checkbox" ng-model="togo"><label class="pull-right">TO-GO?</label>
-                    <div class="current-order"  ng-repeat="item in current_order">
-                        <table class="order-table">
-                            <tr class="order-row">
-                                <td class="order-item-name">{{item.name}} <span ng-if="item.side  && item.name != 'Side chips'" class="order-item-side">//{{item.side}}</span> <span class="order-item-special-asterisk "ng-if="item.special">*</span></td>
-                                <td class="order-item-special "><button class="btn btn-lg btn-info pull-right" ng-click="open(item)"><i class="fa fa-plus"></i></button> </td>
-                                <td class="order-item-delete "><button class="btn  btn-lg btn-danger" ng-click="deleteItem($index,item)"><i class="fa fa-trash-o"></i></button></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="total-price">
-                        <h3 class="pull-right">${{total_price}}</h3><br>
+</div>
 
-                        <button value="submit" ng-model="currentOrder" class="btn btn-group-lg btn-success pull-right" ng-click="addOrder()">Submit</button>
-                    </div>
-                </div>
-            </div>
 
-        </div>
-
-        <div ng-include="'partials/order-special-modal.html'"></div>
-    </div>
 </div>
