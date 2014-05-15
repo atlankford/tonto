@@ -746,7 +746,12 @@ angular.module('myApp.controllers', [])
 
 
         $scope.sides = ['No Side', 'Chips', 'Salad', 'Salad Style'];
-        $scope.modItems = ['cheez ','ched ','jack ','BC ','cucum ','fried ','onion ','peprs ', 'carot ', 'slaw ', 'sauce ', 'bun ', 'rare ', 'mdrar ', 'med ', 'well ', 'plain ', 'letuc ', 'tom ', 'tofu ', 'salVg ', 'balVg ', 'soyVg ', 'appVg ', 'cut.5 ', 'apple ', 'pork ', 'chckn ', 'jerk ', 'aioli ', 'grens ', 'spicy ', 'ltspc ', 'vegan ', 'grOns ', 'frdPO ', 'mayo ', 'mustd ', 'nut ', 'peanut ', 'kmchi ', 'pnapp ', 'grEgg'];
+        $scope.modItems = ['cheez ','ched ','jack ','BC ','cucum ','fried ','onion ',
+            'peprs ', 'carot ', 'slaw ', 'sauce ', 'bun ', 'rare ', 'mdrar ', 'med ',
+            'well ', 'plain ', 'letuc ', 'tom ', 'tofu ', 'salVg ', 'balVg ', 'soyVg ',
+            'appVg ', 'cut.5 ', 'apple ', 'pork ', 'chckn ', 'jerk ', 'aioli ', 'grens ',
+            'spicy ', 'ltspc ', 'vegan ', 'grOns ', 'frdPO ', 'mayo ', 'mustd ', 'nut ',
+            'peanut ', 'kmchi ', 'pnapp ', 'grEgg'];
         $scope.modTypes = ['86: ', 'ADD: ', 'SUB: ', 'OTS: '];
         $scope.modString = "";
 
