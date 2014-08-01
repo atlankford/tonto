@@ -38,9 +38,18 @@
         <h3 id="time" class="text-danger time"></h3>
 
         <div class="checkbox enable-print-checkbox">
-            <label>
-                <input ng-model="print" type="checkbox"> Enable Print
-            </label>
+            <switch
+                    bs-form-control
+                    ng-model="print"
+                    label="Print Enable"
+                    label-class=""
+                    class="col-xs-6 col-sm-6 col-lg-6"
+                    >
+            </switch>
+            <!--<label>-->
+                <!---->
+                <!--<input ng-model="print" type="checkbox"> Enable Print-->
+            <!--</label>-->
         </div>
     </div>
     <a href="#/dashboard.html" class="menu-back-button"><i class="fa fa-tachometer"></i></a>
