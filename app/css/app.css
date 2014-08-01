@@ -1,5 +1,24 @@
 /* app css stylesheet */
-
+@font-face
+{
+    font-family: Covered By Your Grace;
+    src: url(fonts/CoveredByYourGrace.ttf)format('truetype');
+}
+@font-face
+{
+    font-family: Monoton;
+    src: url(fonts/Monoton-Regular.ttf)format('truetype');
+}
+@font-face
+{
+    font-family: type;
+    src: url(fonts/ATypewriterForMe.ttf)format('truetype');
+}
+@font-face
+{
+    font-family: lcd;
+    src: url(fonts/lcd.ttf)format('truetype');
+}
 .hide {
     display: none;
 }
@@ -82,14 +101,8 @@ html, body{
 }
 
 body {
-    background-color: #2e2e2d;
-    color: #9ac;
-    font-family: 'Lato', sans-serif;
+
     font-weight: 300;
-    padding-top: 50px;
-    padding-bottom: 40px;
-
-
 }
 
 /*start login style*/
@@ -97,11 +110,15 @@ body {
 
 .form-signin {
     max-width: 330px;
-    padding: 15px;
+    /*padding: 15px;*/
     margin: 0 auto;
+    /*border: 3px solid #007aff;*/
+    -webkit-border-radius: 8px;
+    color:white;
 }
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
+
     margin-bottom: 10px;
 }
 .form-signin .checkbox {
@@ -175,7 +192,7 @@ code {
 /*my custom styles*/
 
 .logo-login {
-    margin-top: 20px;
+
     border: none;
     width: 100%;
     background-color: inherit;
@@ -195,10 +212,10 @@ code {
     margin-top: 50px;
     margin-bottom: 30px;
     padding: 5px;
-    color: #aec;
+
 }
 a.dashboard{
-    color: #9ac;
+
 }
 .dash{
     margin-bottom: 50px;
@@ -209,25 +226,32 @@ a.dashboard{
 /*Order*/
 .menu-item-container{
     display: inline-block;
-    margin-top: 30px;
+    margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .menu-item{
-    margin: 10px;
-    width: 100px;
+    margin: 5px;
+    font-size: 20pt;
+    width: 125px;
+    height: 100px;
 }
 
 
 .current-order-container{
-    position: relative;
 
-    margin-top: 40px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 80%;
+
+    /*position: relative;*/
+    /*margin-top: 40px;*/
     /*background-color: #223358;*/
-    width: 100%;
-    height: 500px;
-    overflow-y: auto;
+    /*width: 100%;*/
+    /*height: 90%;*/
+    /*overflow-y: auto;*/
 }
 
 .customer-name{
@@ -304,7 +328,7 @@ tr{
 .order-up-button{
     margin-left: 10px;
     padding-bottom: 5px;
-    width: 190px;
+    width: 200px;
     height: 100px;
     position: absolute;
     bottom: 10px;
@@ -353,11 +377,12 @@ tr{
     margin-top: 10px;
 }
 .menu-body{
-    height: 800px;
+height: 140%;
     width: 100%;
     background-color: #000;
     position: fixed;
-    top:0px;
+    top: -40px;
+
 }
 
 
@@ -367,19 +392,21 @@ tr{
 .name{
     width: 30%;
     font-size: 20pt;
-    font-family: 'Covered By Your Grace', cursive;
+    font-family: type;
     color: #0c69b9;
 }
 
 .description{
+    font-family: type;
     color: #b1c4eb;
     font-size: 16px;
 
 }
 .price{
+    font-family: 'Covered By Your Grace', cursive;
     text-align: right;
     color: #00BF86;
-    font-size: 16px;
+    font-size: 28px;
 
 }
 .edit-menu{
@@ -467,8 +494,8 @@ tr{
 }
 .enable-print-checkbox{
     position: fixed;
-    bottom: 10px;
-    right: 60px;
+    bottom: 3px;
+    right: 45px;
 }
 /*animate classes*/
 .animate-enter-setup {
@@ -505,6 +532,7 @@ tr{
     margin: 5px;
     border: solid 1px #b1c4eb;
     position: relative;
+    font-weight: 500;
 }
 
 /*start kitchen display css*/
@@ -518,11 +546,19 @@ tr{
     font-size: 20px;
     color: #ff7319;
     text-align: right;
-    padding-right: 5px
+    padding-right: 5px;
+    font-weight: 500;
 
 }
-.item-customer{
+.item-time{
+    font-size: 16px;
+    text-align: right;
+    padding-right: 5px;
+    font-weight: 400;
+}
 
+.item-customer{
+    font-weight: 500;
     color: #b1c4eb;
     font-size: 18px;
     margin: 4px;
@@ -569,6 +605,7 @@ text-align: right;
 }
 .pad-mods{
     margin: 5px;
+    font-size: 19pt;
 }
 
 #modString{
@@ -626,8 +663,8 @@ text-align: right;
 
 
 .archive-table{
-    background-color: white;
-    color: black;
+    /*background-color: #2b3e50;*/
+    /*color: black;*/
     width: 100%;
 }
 
@@ -641,7 +678,38 @@ text-align: right;
 }
 
 .archive-table-col{
-    width: 20%;
+    /*width: 20%;*/
     border: 1px #ccc solid;
     text-align: center;
+}
+
+.fill{
+    width: 100%;
+    height: 100%;
+}
+
+a.list-group-item{
+    background-color: #4E5D6C;
+    color: white;
+}
+
+
+
+a.food{
+    background-color: #4E5D6C;
+    color: #000000;
+    border: 1px solid #bbbbbb;
+}
+
+a.food:hover{
+    background-color: #c6c6c6;
+}
+
+.time{
+    font-family: lcd;
+    font-size: 42pt;
+}
+
+.panel-body{
+    background-color: #f9f9f9;
 }

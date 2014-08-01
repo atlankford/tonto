@@ -1,0 +1,27 @@
+
+<!-- Sidebars -->
+<div  class="sidebar sidebar-left" toggleable parent-active-class="sidebar-left-in" id="mainSidebar">
+    <div class="scrollable">
+        <div class="scrollable-content">
+            <div class="list-group" toggle="off" bubble target="mainSidebar">
+                <div ng-include="'partials/sidebar.html'"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="app" ng-swipe-right="toggle('mainSidebar')">
+
+    <div class="app-body">
+        <div class="app-content">
+            <div class="scrollable">
+                <div class="scrollable-content">
+                    <div ng-include="'partials/help-view.html'"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

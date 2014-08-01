@@ -1,0 +1,15 @@
+<div ng-controller="SmsCtrl" >
+    <br>
+    <br>
+    <br>
+    <div class="container">
+    <div class="form-signin" >
+        <h2>Send SMS</h2>
+        <label>Phone Number:</label><input class="form-control" type="tel" ng-model="tel"/>
+        <label>Message:</label><textarea type="text" class="form-control" ng-model="message" ></textarea>
+        <br>
+        <button ng-click="sendSms(tel,message)" class="btn-success btn btn-large">Send SMS</button>
+    </div>
+    </div>
+    <a href="#/dashboard.html" class="menu-back-button"><i class="fa fa-tachometer"></i></a>
+</div>

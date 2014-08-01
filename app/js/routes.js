@@ -21,15 +21,28 @@ angular.module('myApp.routes', ['ngRoute'])
             templateUrl: 'partials/account.html',
             controller: 'AccountCtrl'
         });
+        $routeProvider.when('/waitlist', {
+            authRequired: true, // must authenticate before viewing this page
+            templateUrl: 'partials/waitlist.html'
+        });
         $routeProvider.when('/order', {
             authRequired: true, // must authenticate before viewing this page
             templateUrl: 'partials/order.html'
 
         });
-        $routeProvider.when('/menu', {
-            templateUrl: 'partials/menu.html',
-            controller: 'MenuCtrl'
+        $routeProvider.when('/sms', {
+            authRequired: true, // must authenticate before viewing this page
+            templateUrl: 'partials/sms.html'
 
+        });
+        $routeProvider.when('/menu', {
+            templateUrl: 'partials/menu.html'
+
+
+        });
+        $routeProvider.when('/help', {
+            authRequired: true, // must authenticate before viewing this page
+            templateUrl: 'partials/help.html'
         });
         $routeProvider.when('/dashboard', {
             authRequired: true, // must authenticate before viewing this page
@@ -37,7 +50,6 @@ angular.module('myApp.routes', ['ngRoute'])
 
         });
         $routeProvider.when('/kitchen', {
-            authRequired: true, // must authenticate before viewing this page
             templateUrl: 'partials/kitchen.html'
 
         });
@@ -56,10 +68,12 @@ angular.module('myApp.routes', ['ngRoute'])
 
         });
         $routeProvider.when('/kitchen-touch', {
+            authRequired: true, // must authenticate before viewing this page
             templateUrl: 'partials/kitchen-touch.html'
 
         });
         $routeProvider.when('/archive', {
+            authRequired: true, // must authenticate before viewing this page
             templateUrl: 'partials/archived-orders.html'
 
         });

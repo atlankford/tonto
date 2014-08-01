@@ -1,47 +1,47 @@
-<div ng-include="'partials/navbar.html'"></div>
-<div ng-controller="OrderCtrl">
-    <div class="container">
-        <!--<alert class="submit-alert" ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>-->
-        <div class="row">
-            <div class="col-md-7 col-lg-7 col-sm-7 col-xs-7 ">
-                <div class="menu-item-container" ng-repeat="menuItem in menu">
-                    <a class="btn btn-primary menu-item" ng-click="addItem(menuItem)" ng-model="menuItem">
-                        <i class="{{menuItem.icon}} fa-2x"></i><br> {{menuItem.shortname}}</a>
-                </div>
+
+<!-- Sidebars -->
+<div class="sidebar sidebar-left" toggleable parent-active-class="sidebar-left-in" id="mainSidebar">
+    <div class="scrollable">
+        <div class="scrollable-content">
+            <div class="list-group" toggle="off" bubble target="mainSidebar">
+                <div ng-include="'partials/sidebar.html'"></div>
             </div>
-
-            <div class="col-md-5 col-lg-5 col-sm-5 col-xs-5">
-
-                <div class="current-order-container">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <input placeholder="Add Name" ng-model="customer" class="customer-name" id="custName" type="text" value="">
-                        </div>
-                        <div class="col-md-6">
-                            <input placeholder="Add Phone" ng-model="phone" class="customer-name" id="phone" type="number" value="">
-                        </div>
-
-                    </div>
-                    <input class="togo-button pull-right" type="checkbox" ng-model="togo"><label class="pull-right">TO-GO?</label>
-                    <div class="current-order"  ng-repeat="item in current_order">
-                        <table class="order-table">
-                            <tr class="order-row">
-                                <td class="order-item-name">{{item.name}} <span ng-if="item.side  && item.name != 'Side chips'" class="order-item-side">//{{item.side}}</span> <span class="order-item-special-asterisk "ng-if="item.special">*</span></td>
-                                <td class="order-item-special "><button class="btn btn-lg btn-info pull-right" ng-click="open(item)"><i class="fa fa-plus"></i></button> </td>
-                                <td class="order-item-delete "><button class="btn  btn-lg btn-danger" ng-click="deleteItem($index,item)"><i class="fa fa-trash-o"></i></button></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="total-price">
-                        <h3 class="pull-right">${{total_price}}</h3><br>
-
-                        <button value="submit" ng-model="currentOrder" class="btn btn-group-lg btn-success pull-right" ng-click="addOrder()">Submit</button>
-                    </div>
-                </div>
-            </div>
-
         </div>
-
-        <div ng-include="'partials/order-special-modal.html'"></div>
     </div>
 </div>
+
+<div class="app">
+    <!-- Navbars -->
+    <div class="navbar navbar-app navbar-absolute-top">
+
+        <div class="navbar-brand navbar-brand-center">
+            <span><img src="img/logos/logo-white2.png" width="190px"> </span>
+        </div>
+
+        <div class="btn-group pull-left">
+            <div ng-click="toggle('mainSidebar')" class="btn btn-navbar sidebar-toggle">
+                <i class="fa fa-tachometer"></i> Dashboard
+            </div>
+        </div>
+
+        <div class="btn-group pull-right">
+            <div class="btn btn-navbar">
+                <a href="#/order"> <i class="fa fa-plus"></i> New Order </a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="app-body">
+        <div class="app-content">
+            <div class="scrollable">
+                <div class="scrollable-content">
+                    <div ng-include="'partials/order-view.html'"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

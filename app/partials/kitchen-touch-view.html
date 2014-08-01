@@ -1,0 +1,38 @@
+<div ng-controller="KitchenTouchCtrl">
+    <div class="orderContainer">
+        <div class="order-ticket" ng-class="{togoticket: item.togo == 'TO-GO'}" ng-repeat="(key,item) in orders | limitTo: 5 ">
+            <div class="row" >
+                <div class="col-md-6">
+                    <p class="item-id">{{item.id}}</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="item-togo">{{item.togo}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="item-customer ">{{item.customer}}<span class="item-time text-danger pull-right">{{item.time.substring(17,22)}}</span></p>
+                </div>
+            </div>
+            <div class="row" ng-repeat="i in item.ITEM" >
+                <div class="col-md-12" ng-if="$index!=0">
+                    <p class="item-name">{{$index}}) {{i.name}}</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="item-side" ng-if="i.name != 'Side chips'"> {{i.side}}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="item-special">{{i.special}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="line center-block"></div>
+            </div>
+
+            <button class="btn btn-success pad order-up-button" ng-click="deleteItem(key,item)"><img src="img/logos/logo-white2.png" width="185px"/> </button>
+        </div>
+
+    </div>
+    <a href="#/dashboard.html" class="menu-back-button"><i class="fa fa-tachometer"></i></a>
+
+</div>

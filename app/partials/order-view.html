@@ -1,0 +1,102 @@
+
+<div ng-controller="OrderCtrl">
+    <div class="container fill">
+
+        <div class="col-md-7 col-lg-7 col-sm-7 col-xs-7 " ng-swipe-right="toggle('mainSidebar')">
+            <div class="menu-item-container" ng-repeat="menuItem in menu">
+                <a class="btn btn-primary menu-item" ng-click="addItem(menuItem)" ng-model="menuItem">
+                    <i class="{{menuItem.icon}} fa-2x"></i><br> {{menuItem.shortname}}</a>
+            </div>
+        </div>
+        <div class="col-md-5 col-lg-5 col-sm-5 col-xs-5 current-order-container">
+            <div class="btn-group justified nav-tabs">
+                <a class="btn btn-default active oreder-tab" href="#Tab1" toggle="on" active-class="active">Items
+                </a>
+
+                <a class="btn btn-default" href="#Tab2" toggle="on" active-class="active">Customer
+                </a>
+
+                <a class="btn btn-default" href="#Tab3" toggle="on" active-class="active">Review
+                </a>
+            </div>
+            <div class="tab-content order-panel">
+                <div class="tab-pane" toggleable active-class="active" default="active" id="Tab1" exclusion-group="myTabs">
+                    <div class="list-group" toggle="off" >
+                        <br>
+                        <a ng-swipe-right="deleteItem($index,item)" ng-click="open(item)" class="list-group-item food media" href="" ng-repeat="item in current_order">
+                            <div class="pull-left">
+                                <i class="{{item.icon}} fa-3x"></i>
+                            </div>
+                            <div class="media-body">
+                                <h5 class="media-heading">{{item.name}}<span class="order-item-special-asterisk" ng-if="item.special">*</span></h5>
+                                <small>
+                                    <span ng-if="item.side  && item.name != 'Side chips'" class="order-item-side">{{item.side}}</span> <span class="order-item-special-asterisk pull-right">{{item.special}}</span>
+                                </small>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="tab-pane customer-info" toggleable active-class="active" id="Tab2" exclusion-group="myTabs">
+                    <br>
+
+                    <input
+                            bs-form-control
+                            id="custName"
+                            type="text"
+                            ng-model="customer"
+                            label="Name"
+                            label-class="col-xs-4 col-sm-4 col-lg-4 customer-info"
+                            class="col-xs-8 col-sm-8 col-lg-8"
+                            placeholder="Customer Name"
+                            />
+                    <br>
+                    <switch
+                            bs-form-control
+                            ng-model="togo"
+                            label="To Go?"
+                            label-class="col-xs-6 col-sm-6 col-lg-6 customer-info"
+                            class="col-xs-6 col-sm-6 col-lg-6"
+                            >
+                    </switch>
+                    <br>
+                    <switch
+                            bs-form-control
+                            ng-model="sms"
+                            label="SMS?"
+                            label-class="col-xs-6 col-sm-6 col-lg-6 customer-info"
+                            class="col-xs-6 col-sm-6 col-lg-6"
+                            >
+                    </switch>
+                    <br>
+                    <div ng-show="sms">
+                        <input
+                                bs-form-control
+                                type="tel"
+                                ng-model="phone"
+                                label="Tel"
+                                label-class="col-xs-4 col-sm-4 col-lg-4 customer-info"
+                                class="col-xs-8 col-sm-8 col-lg-8"
+                                placeholder="Phone Number"
+                                />
+                    </div>
+                </div>
+
+                <div class="tab-pane" toggleable active-class="active" id="Tab3" exclusion-group="myTabs">
+                    <div class="app">
+                        <br>
+                        <h3 class="text-center">Name: {{customer}}</h3>
+                        <br>
+                        <h3 class="text-center">Phone: {{phone}}</h3>
+                        <br>
+                        <h1 class="text-center">${{total_price}}</h1>
+                        <br>
+                        <button ng-model="currentOrder" class="btn btn-success btn-block btn-lg text-center" ng-click="addOrder()">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-include="'partials/order-special-modal.html'"></div>
+</div>
+</div>

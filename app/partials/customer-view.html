@@ -1,21 +1,28 @@
 
-<div ng-controller="CustomerViewCtrl">
-    <div class="row">
-
-            <canvas id="myCanvas" width="1000px" height="600px">
-                <!-- Insert fallback content here -->
-            </canvas>
-
-
+<!-- Sidebars -->
+<div  class="sidebar sidebar-left" toggleable parent-active-class="sidebar-left-in" id="mainSidebar">
+    <div class="scrollable">
+        <div class="scrollable-content">
+            <div class="list-group" toggle="off" bubble target="mainSidebar">
+                <div ng-include="'partials/sidebar.html'"></div>
+            </div>
+        </div>
     </div>
-    <a href="#/dashboard.html" class="menu-back-button"><i class="fa fa-tachometer"></i></a>
-    <div class="checkbox enable-print-checkbox">
-        <label>
-            <button class="btn btn-success btn-xs" type="button" id="addCircle">Add Circle</button>
-            <button class="btn btn-success btn-xs" type="button" id="startAnim">Start</button>
-            <button class="btn btn-danger btn-xs" type="button" id="stopAnim">Stop</button>
-            <button class="btn btn-danger btn-xs" type="button"id="resetAnim">Reset</button>
-        </label>
-    </div>
-
 </div>
+<div class="app" ng-swipe-right="toggle('mainSidebar')"  >
+    <div class="app-body" >
+        <div class="app-content" >
+            <div class="scrollable">
+                <div class="scrollable-content" class="menu-body" >
+                    <div ng-include="'partials/customer-view-view.html'"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

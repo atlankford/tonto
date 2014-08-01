@@ -1,0 +1,16 @@
+<div ng-controller="MenuCtrl" class="menu-body scrollable" >
+    <div class="board">
+        <span id="no">Chomp</span>
+        <span id="vacancy">Chomp</span>
+    </div>
+    <div class="row" >
+        <table class="display-menu">
+            <tr ng-repeat="menuItem in menu">
+            <td class="name {{menuItem.class}}">{{menuItem.name}}</td>
+            <td class="description hidden-xs hidden-sm">{{menuItem.description}}</td>
+            <td class="price">${{menuItem.price}}</td>
+            </tr>
+        </table>
+    </div>
+    <a href="#/dashboard.html" class="menu-back-button"><i class="fa fa-tachometer"></i></a>
+</div>

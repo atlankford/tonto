@@ -19,7 +19,7 @@ border: #414140;
 }
 
 legend{
-    color: #b1c4eb:
+    color: #b1c4eb;
 }
 
 .menu-back-button{
@@ -27,3 +27,15 @@ legend{
     bottom:10px;
     left: 10px;
 }
+
+.bg{
+    /*background-image: url("../img/bg.jpg");*/
+    /*background-color: #0062CC;*/
+    background-size: 100% ;
+    height: 100%;
+}
+
+.outline{
+    border: solid 1px white;
+}
+

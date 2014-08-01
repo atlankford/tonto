@@ -1,43 +1,27 @@
-<div ng-include="'partials/navbar.html'"></div>
-<div ng-controller="KitchenCtrl">
-    <div class="orderContainer">
 
-        <div class="order-ticket" ng-repeat="(key,item) in orders | limitTo: 5 " >
-
-            <div class="row" >
-                <div class="col-md-6">
-                    <p class="item-id">{{item.id}}</p>
-                </div>
-                <div class="col-md-6">
-                    <p class="item-togo">{{item.togo}}</p>
-                </div>
+<!-- Sidebars -->
+<div  class="sidebar sidebar-left" toggleable parent-active-class="sidebar-left-in" id="mainSidebar">
+    <div class="scrollable">
+        <div class="scrollable-content">
+            <div class="list-group" toggle="off" bubble target="mainSidebar">
+                <div ng-include="'partials/sidebar.html'"></div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <p class="item-customer ">{{item.customer.toUpperCase()}}</p>
-                </div>
-            </div>
-            <div class="row" ng-repeat="i in item.ITEM" ng-if="i.name != 'Soda'" >
-                <div class="col-md-12" ng-if="$index!=0">
-                    <p class="item-name" >{{i.name}}</p>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p class="item-side" ng-if="i.name != 'Side chips'"> {{i.side}}</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p class="item-special">{{i.special}}</p>
-                        </div>
-                    </div>
-                    <div class="line center-block"></div>
-                </div>
-
-            </div>
-
-        </div>
-        <div class="checkbox enable-print-checkbox">
-            <label>
-                <input ng-model="print" type="checkbox"> Enable Print
-            </label>
         </div>
     </div>
 </div>
+
+<div class="app" ng-swipe-right="toggle('mainSidebar')">
+
+    <div class="app-body">
+        <div class="app-content">
+            <div class="scrollable">
+                <div class="scrollable-content">
+                    <div ng-include="'partials/kitchen-view.html'"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

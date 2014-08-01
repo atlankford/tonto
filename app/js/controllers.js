@@ -85,229 +85,300 @@ angular.module('myApp.controllers', [])
         //TODO
     }]) //end dashboard controller
 
-    .controller('CustomerViewCtrl', ['$scope', 'loginService', '$location', function($scope, loginService, $location) {
+    .controller('WaitlistCtrl', ['$scope', '$firebase', 'syncData', function($scope, $firebase, syncData) {
 
-        var ref = new Firebase('https://tonto.firebaseio.com/LOCATION/1/ACTIVE_ORDER');
+        $scope.waitingList = "";
+        var ref = new Firebase('https://tonto.firebaseio.com/LOCATION/1/WAITLIST');
+
+        $scope.waitingList  = syncData('LOCATION/1/WAITLIST', 10);
 
 
-        var canvas = document.getElementById("myCanvas");
-        var pause = true;
-        var circle = []; //circles array
-        var isCanvasSupported = false;
-        var context = '';
-        if (canvas.getContext){
-            isCanvasSupported = true;
-            context = canvas.getContext('2d');
-        }
+        $scope.name = '';
+        $scope.partySize = '';
+        $scope.tel = '';
 
-        var addCircleBtn = document.getElementById("addCircle");
-        var startBtn = document.getElementById("startAnim");
-        var stopBtn = document.getElementById("stopAnim");
-        var totalCircleBtn = document.getElementById("totalCircles");
-        var aminStatusBtn = document.getElementById("aminStatus");
-        var resetAnimBtn = document.getElementById("resetAnim");
-
-        var radiusWidth = 100;
-        var interTime = 50;
-        var defaultOption = {};
-        defaultOption.x = 100;
-        defaultOption.y = 100;
-
-        var counter;
-        var temp = "Customer Name"
-
-        $scope.circles = circle;
-
-        if(isCanvasSupported){
-//            addCircle();
-            setInterval(function(){
-                if(pause){
-                    animateCircle();
-                }
-            }, interTime);
-            canvas.addEventListener('click', function(e){
-                console.log(e);
-                var x;
-                var y;
-
-                var thisradius = (radiusWidth*Math.random());
-                if (e.offsetX || e.offsetY) {
-                    x = e.offsetX;
-                    y = e.offsetY;
-                }
-                else {
-                    x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-                    y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-                }
-                x -= canvas.offsetLeft;
-                y -= canvas.offsetTop;
-
-                console.log(x, y);
-                //addCircle(thisx, thisy, thisradius);
-//                addCircle(x, y, thisradius);
-            }, false);
-
-            if(addCircleBtn){
-                addCircleBtn.addEventListener('click', function(e){
-                    var thisradius = (radiusWidth*Math.random());
-                    addCircle(undefined, undefined, thisradius)
-                }, false);
-            }
-
-            if(startBtn){
-                startBtn.addEventListener('click', function(){
-                    pause = true;
-                    aminStatusChange();
-                },false);
-            }
-
-            if(resetAnimBtn){
-                resetAnimBtn.addEventListener('click', function(){
-                    circle = [];
-                    addCircle();
-                });
-            }
-
-            if(stopBtn){
-                stopBtn.addEventListener('click', function(){
-                    pause = false;
-                    aminStatusChange();
-                },false);
-            }
-            aminStatusChange();
-        }else{
-            alert('Canvas is not supported in you browser.')
-        }
-
-        function degree(value){
-            return value * (Math.PI / 180);
-        }
-
-        function addCircle(x, y, radius, name){
-
-            counter++;
-
-            // If x is not defined
-            if(typeof x == 'undefined'){
-                //get the random position between 1 and canvas.width
-                x = getRandomInt(1,canvas.width);
-            }
-
-            // If y is not defined
-            if(typeof y == 'undefined'){
-                //get the random position between 1 and canvas.height
-                y = getRandomInt(1,canvas.height);
-            }
-
-            // If radius is not defined
-            if(typeof radius == 'undefined'){
-                radius = (radiusWidth*Math.random());
-            }
-
-            // Check if x and y are not in the four corner otherwise the circle will stuck
-            if(x < radius){
-                x = radius;
-            }else if(x > (canvas.width-radius)){
-                x = (canvas.width-radius);
-            }
-
-            if(y < radius){
-                y = radius;
-            }else if(y > (canvas.height-radius)){
-                y = (canvas.height-radius);
-            }
-
-            //add the circle on the place of x and y
-            circle.push({x:x,
-                xvc:(3*Math.random()),
-                y:y,
-                yvc:(3*Math.random()),
-                radius:radius,
-                color: 'rgba(' + (Math.random()*238).toFixed(0) + ', ' +
-                    (Math.random()*238).toFixed(0) + ', ' +
-                    (Math.random()*238).toFixed(0) + ', 1.0)',
-                customer_name: name
-            });
-
-            totalCircle();
-        }
-
-        function animateCircle(){
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            circle.forEach(function(circle){
-                context.beginPath();
-                //context.arc(circle.x, circle.y, circle.radius, degree(0), degree(360), false);
-                context.arc(circle.x, circle.y, circle.radius, degree(0), degree(360), false);
-                context.fillStyle = circle.color;
-                context.closePath();
-                context.fill();
-                context.strokeStyle ='rgba(0,0,0,255)';
-
-                context.font = "bold 16px sans-serif";
-                context.textAlign= "center";
-                context.strokeText(circle.customer_name, circle.x, circle.y)
-
-                changePosition(circle);
-            });
-        }
-
-        function changePosition(circle){
-            if (circle.x + circle.xvc + circle.radius > canvas.width ||
-                circle.x + circle.xvc - circle.radius < 0){
-                circle.xvc = -circle.xvc;
-            }
-
-            if (circle.y + circle.yvc + circle.radius > canvas.height ||
-                circle.y + circle.yvc - circle.radius  < 0) {
-                circle.yvc= -circle.yvc;
-            }
-
-            circle.x += circle.xvc;
-            circle.y += circle.yvc;
-        }
-
-        function totalCircle(){
-            if(totalCircleBtn) totalCircleBtn.innerText  = circle.length;
-        }
-
-        function aminStatusChange(){
-            if(aminStatusBtn) aminStatusBtn.innerText  = (pause == false)?"Stopped":"Running";
-        }
-
-        /**
-         * Returns a random integer between min and max
-         * Using Math.round() will give you a non-uniform distribution!
-         */
-        function getRandomInt (min, max) {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
-
-//        start order integration
-
-        ref.once('value', function(ref)
+        $scope.add = function (x,y,z)
         {
-            ref.forEach(function(order)
+            var time = $scope.startTime();
+
+            ref.push({name: x, size: y, tel: z, time: time});
+            $scope.name = '';
+            $scope.partySize = '';
+            $scope.tel = '';
+        };
+
+
+        $scope.deleteItem = function(x) {
+
+         var customer = ref.child(x)
+         customer.remove();
+
+        };
+
+        $scope.checkTime = function(i){
+            if (i < 10)
             {
+                i = "0" + i;
+            }
+            return i;
+        };
 
-                var name = order.child('customer').val();
-                var thisradius = (radiusWidth*Math.random());
-                if(order.$index != 0) {
-                    addCircle(undefined, undefined, thisradius, name)
-                }
-            })
+        $scope.startTime = function() {
+            var today = new Date();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
 
-        });
+            // add a zero in front of numbers<10
+            m = checkTime(m);
+            s = checkTime(s);
 
-        ref.on('value', function(ref)
-        {
-            var thisradius = (radiusWidth*Math.random());
-            var name = ref.child('customer').val();
-            addCircle(undefined, undefined, thisradius, name)
-        })
+            //Check for PM and AM
+            var day_or_night = (h > 11) ? "PM" : "AM";
 
-        syncData('LOCATION/1/ACTIVE_ORDER').$bind($scope, 'circles');
+            //Convert to 12 hours system
+            if (h > 12)
+                h -= 12;
 
+            //Add time to the headline and update every 500 milliseconds
+            $scope.time = (h + ":" + m + ":" + s + " " + day_or_night);
+//            setTimeout(function() {
+//                $scope.startTime()
+//            }, 500);
+            return $scope.time;
+        };
 
+    }]) //end dashboard controller
+
+    .controller('CustomerViewCtrl', ['$scope', '$firebase', function($scope,  $firebase) {
+
+        var ref = new Firebase('https://tonto.firebaseio.com');
+
+        var active_ordersRef = ref.child('LOCATION/1/ACTIVE_ORDER').limit(8);
+        var archive_ordersRef = ref.child('LOCATION/1/ARCHIVE_ORDER').limit(8);
+
+        $scope.orders = $firebase(active_ordersRef);
+        $scope.archiveItems = $firebase(archive_ordersRef);
+
+//
+//        var canvas = document.getElementById("myCanvas");
+//        var pause = true;
+//        var circle = []; //circles array
+//        var isCanvasSupported = false;
+//        var context = '';
+//        if (canvas.getContext){
+//            isCanvasSupported = true;
+//            context = canvas.getContext('2d');
+//        }
+//
+//        var addCircleBtn = document.getElementById("addCircle");
+//        var startBtn = document.getElementById("startAnim");
+//        var stopBtn = document.getElementById("stopAnim");
+//        var totalCircleBtn = document.getElementById("totalCircles");
+//        var aminStatusBtn = document.getElementById("aminStatus");
+//        var resetAnimBtn = document.getElementById("resetAnim");
+//
+//        var radiusWidth = 100;
+//        var interTime = 50;
+//        var defaultOption = {};
+//        defaultOption.x = 100;
+//        defaultOption.y = 100;
+//
+//        var counter;
+//        var temp = "Customer Name"
+//
+//        $scope.circles = circle;
+//
+//        if(isCanvasSupported){
+////            addCircle();
+//            setInterval(function(){
+//                if(pause){
+//                    animateCircle();
+//                }
+//            }, interTime);
+//            canvas.addEventListener('click', function(e){
+//                console.log(e);
+//                var x;
+//                var y;
+//
+//                var thisradius = (radiusWidth*Math.random());
+//                if (e.offsetX || e.offsetY) {
+//                    x = e.offsetX;
+//                    y = e.offsetY;
+//                }
+//                else {
+//                    x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+//                    y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+//                }
+//                x -= canvas.offsetLeft;
+//                y -= canvas.offsetTop;
+//
+//                console.log(x, y);
+//                //addCircle(thisx, thisy, thisradius);
+////                addCircle(x, y, thisradius);
+//            }, false);
+//
+//            if(addCircleBtn){
+//                addCircleBtn.addEventListener('click', function(e){
+//                    var thisradius = (radiusWidth*Math.random());
+//                    addCircle(undefined, undefined, thisradius)
+//                }, false);
+//            }
+//
+//            if(startBtn){
+//                startBtn.addEventListener('click', function(){
+//                    pause = true;
+//                    aminStatusChange();
+//                },false);
+//            }
+//
+//            if(resetAnimBtn){
+//                resetAnimBtn.addEventListener('click', function(){
+//                    circle = [];
+//                    addCircle();
+//                });
+//            }
+//
+//            if(stopBtn){
+//                stopBtn.addEventListener('click', function(){
+//                    pause = false;
+//                    aminStatusChange();
+//                },false);
+//            }
+//            aminStatusChange();
+//        }else{
+//            alert('Canvas is not supported in you browser.')
+//        }
+//
+//        function degree(value){
+//            return value * (Math.PI / 180);
+//        }
+//
+//        function addCircle(x, y, radius, name){
+//
+//            counter++;
+//
+//            // If x is not defined
+//            if(typeof x == 'undefined'){
+//                //get the random position between 1 and canvas.width
+//                x = getRandomInt(1,canvas.width);
+//            }
+//
+//            // If y is not defined
+//            if(typeof y == 'undefined'){
+//                //get the random position between 1 and canvas.height
+//                y = getRandomInt(1,canvas.height);
+//            }
+//
+//            // If radius is not defined
+//            if(typeof radius == 'undefined'){
+//                radius = (radiusWidth*Math.random());
+//            }
+//
+//            // Check if x and y are not in the four corner otherwise the circle will stuck
+//            if(x < radius){
+//                x = radius;
+//            }else if(x > (canvas.width-radius)){
+//                x = (canvas.width-radius);
+//            }
+//
+//            if(y < radius){
+//                y = radius;
+//            }else if(y > (canvas.height-radius)){
+//                y = (canvas.height-radius);
+//            }
+//
+//            //add the circle on the place of x and y
+//            circle.push({x:x,
+//                xvc:(3*Math.random()),
+//                y:y,
+//                yvc:(3*Math.random()),
+//                radius:radius,
+//                color: 'rgba(' + (Math.random()*238).toFixed(0) + ', ' +
+//                    (Math.random()*238).toFixed(0) + ', ' +
+//                    (Math.random()*238).toFixed(0) + ', 1.0)',
+//                customer_name: name
+//            });
+//
+//            totalCircle();
+//        }
+//
+//        function animateCircle(){
+//            context.clearRect(0, 0, canvas.width, canvas.height);
+//            circle.forEach(function(circle){
+//                context.beginPath();
+//                //context.arc(circle.x, circle.y, circle.radius, degree(0), degree(360), false);
+//                context.arc(circle.x, circle.y, circle.radius, degree(0), degree(360), false);
+//                context.fillStyle = circle.color;
+//                context.closePath();
+//                context.fill();
+//                context.strokeStyle ='rgba(0,0,0,255)';
+//
+//                context.font = "bold 16px sans-serif";
+//                context.textAlign= "center";
+//                context.strokeText(circle.customer_name, circle.x, circle.y)
+//
+//                changePosition(circle);
+//            });
+//        }
+//
+//        function changePosition(circle){
+//            if (circle.x + circle.xvc + circle.radius > canvas.width ||
+//                circle.x + circle.xvc - circle.radius < 0){
+//                circle.xvc = -circle.xvc;
+//            }
+//
+//            if (circle.y + circle.yvc + circle.radius > canvas.height ||
+//                circle.y + circle.yvc - circle.radius  < 0) {
+//                circle.yvc= -circle.yvc;
+//            }
+//
+//            circle.x += circle.xvc;
+//            circle.y += circle.yvc;
+//        }
+//
+//        function totalCircle(){
+//            if(totalCircleBtn) totalCircleBtn.innerText  = circle.length;
+//        }
+//
+//        function aminStatusChange(){
+//            if(aminStatusBtn) aminStatusBtn.innerText  = (pause == false)?"Stopped":"Running";
+//        }
+//
+//        /**
+//         * Returns a random integer between min and max
+//         * Using Math.round() will give you a non-uniform distribution!
+//         */
+//        function getRandomInt (min, max) {
+//            return Math.floor(Math.random() * (max - min + 1)) + min;
+//        }
+//
+////        start order integration
+//
+//        ref.once('value', function(ref)
+//        {
+//            ref.forEach(function(order)
+//            {
+//
+//                var name = order.child('customer').val();
+//                var thisradius = (radiusWidth*Math.random());
+//                if(order.$index != 0) {
+//                    addCircle(undefined, undefined, thisradius, name)
+//                }
+//            })
+//
+//        });
+//
+//        ref.on('value', function(ref)
+//        {
+//            var thisradius = (radiusWidth*Math.random());
+//            var name = ref.child('customer').val();
+//            addCircle(undefined, undefined, thisradius, name)
+//        })
+//
+////        syncData('LOCATION/1/ACTIVE_ORDER').$bind($scope, 'circles');
+//
+//
 
     }]) //end dashboard controller
 
@@ -430,6 +501,25 @@ angular.module('myApp.controllers', [])
     }])
     //end menu controller
 
+    .controller('HelpCtrl',['$scope', '$firebase', 'FBURL', function($scope, $firebase, FBURL) {
+
+
+    }])
+    .controller('SmsCtrl',['$scope', '$firebase', 'FBURL', function($scope, $firebase, FBURL) {
+
+        var ref = new Firebase('https://tonto.firebaseio.com/LOCATION/1/GENERAL_SMS');
+
+        $scope.tel = '';
+        $scope.message = '';
+
+        $scope.sendSms = function (x,y)
+        {
+            ref.push({tel: x, message: y});
+            $scope.tel = '';
+            $scope.message = '';
+        };
+
+    }])
 
 
     .controller('KitchenCtrl', ['$scope', '$firebase', 'FBURL', function($scope, $firebase, FBURL) {
@@ -456,41 +546,41 @@ angular.module('myApp.controllers', [])
 
 
 
-            lastOrderIDRef.on('value', function()
+        lastOrderIDRef.on('value', function()
+        {
+
+
+            if(initTrigger)
             {
+                initTrigger = false;
+            }
+            else if($scope.print)
+            {
+                printRef = active_ordersRef.child(lastOrderID);
 
+                var popUp = window.open('', 'PopUp', 'width=100,height=100');
+                popUp.document.writeln("<br/><br/>");
+                popUp.document.writeln("Order Number: " + lastOrderID + "<br/>");
 
-                if(initTrigger)
+                printRef.once('value', function(orderSnapshot)
                 {
-                    initTrigger = false;
-                }
-                else if($scope.print)
-                {
-                    printRef = active_ordersRef.child(lastOrderID);
+                    popUp.document.writeln(orderSnapshot.child('togo').val() + "<br/>");
+                    popUp.document.writeln("Customer: " + orderSnapshot.child('customer').val() + "<br/>");
+                    popUp.document.writeln("Time: " + orderSnapshot.child('time').val() + "<br/></br></br>");
 
-                    var popUp = window.open('', 'PopUp', 'width=100,height=100');
-                    popUp.document.writeln("<br/><br/>");
-                    popUp.document.writeln("Order Number: " + lastOrderID + "<br/>");
-
-                    printRef.once('value', function(orderSnapshot)
+                    orderSnapshot.child('ITEM').forEach(function(itemSnapshot)
                     {
-                        popUp.document.writeln(orderSnapshot.child('togo').val() + "<br/>");
-                        popUp.document.writeln("Customer: " + orderSnapshot.child('customer').val() + "<br/>");
-                        popUp.document.writeln("Time: " + orderSnapshot.child('time').val() + "<br/></br></br>");
 
-                        orderSnapshot.child('ITEM').forEach(function(itemSnapshot)
-                        {
+                        popUp.document.writeln(itemSnapshot.child('name').val() + ":&emsp;" + itemSnapshot.child('side').val() +":&emsp;" + itemSnapshot.child('special').val() + "<br/><br/>");
 
-                         popUp.document.writeln(itemSnapshot.child('name').val() + ":&emsp;" + itemSnapshot.child('side').val() +":&emsp;" + itemSnapshot.child('special').val() + "<br/><br/>");
+                    })
 
-                        })
-
-                    });
-                    popUp.document.writeln("<br/><br/>");
-                    popUp.print();
-                    popUp.close();
-                }
-            })
+                });
+                popUp.document.writeln("<br/><br/>");
+                popUp.print();
+                popUp.close();
+            }
+        })
 
 
 //
@@ -542,6 +632,7 @@ angular.module('myApp.controllers', [])
 
         var active_ordersRef = ref.child('LOCATION/1/ACTIVE_ORDER');
         var archive_ordersRef = ref.child('LOCATION/1/ARCHIVE_ORDER');
+        var smsQ_Ref = ref.child('LOCATION/1/SMS_Q');
 
         $scope.orders = $firebase(active_ordersRef);
         $scope.archiveItems = $firebase(archive_ordersRef);
@@ -549,8 +640,9 @@ angular.module('myApp.controllers', [])
         $scope.deleteItem = function (x,item) {
             var itemRef = active_ordersRef.child(x);
             var orderId = x;
+            var smsRef = smsQ_Ref.child(x);
 
-           // -5 in date construction string represents GMT -5 (Eastern Standard Time)
+            // -5 in date construction string represents GMT -5 (Eastern Standard Time)
             archive_ordersRef.child(x).set({customer: item.customer, id: item.id, price: item.price, time_submitted: item.time,
                 time_served: new Date( new Date().getTime() - 4 * 3600 * 1000).toUTCString().replace( / GMT$/, "" ), status: "served", togo: item.togo, phone: item.phone
             })
@@ -559,7 +651,9 @@ angular.module('myApp.controllers', [])
             {
                 archive_ordersRef.child(orderId).child('ITEM').child(x).set({name: item.name, special: item.special, side: item.side});
             })
-
+            if(item.sms){
+                smsRef.remove();
+            }
             itemRef.remove();
         };
 
@@ -630,19 +724,22 @@ angular.module('myApp.controllers', [])
 
     .controller('OrderCtrl', ['$scope', '$firebase', 'FBURL','syncData', '$modal', '$log', 'firebaseRef', function($scope, $firebase, FBURL, syncData, $modal, $log, firebaseRef)
     {
-    //Get Root Ref
-    var ref = new Firebase("https://tonto.firebaseio.com/");
+        //Get Root Ref
+        var ref = new Firebase("https://tonto.firebaseio.com/");
 
-    //3 way bind scope.menu to MENU table
-    syncData('LOCATION/1/MENU_ITEM').$bind($scope, 'menu');
+        //3 way bind scope.menu to MENU table
+        syncData('LOCATION/1/MENU_ITEM').$bind($scope, 'menu');
 
-    //Get Active Orders Ref
-    var active_ordersRef = ref.child('LOCATION/1/ACTIVE_ORDER');
+        //Get Active Orders Ref
+        var active_ordersRef = ref.child('LOCATION/1/ACTIVE_ORDER');
+        var smsQ_Ref = ref.child('LOCATION/1/SMS_Q');
 
         $scope.current_order = [];
         $scope.total_price = 0.00;
         $scope.togo = false;
+        $scope.sms = false;
         var setTogo ="";
+        var setSms = "";
 
         //Get Last Order ID from Firebase and add 1 for Order ID (every time the value changes) - Multiuser System
         var orderID;
@@ -666,7 +763,7 @@ angular.module('myApp.controllers', [])
         $scope.addItem = function(x)
         {
             $scope.current_order.push({name: x.name, description: x.description, price: x.price,
-                special: x.special, category: x.category, side: 'Chips', class: x.class});
+                special: x.special, category: x.category, side: 'Chips', class: x.class, icon: x.icon});
             console.log("current order is :" + $scope.current_order);
             $scope.total_price = $scope.total_price + parseFloat(x.price);
         }
@@ -694,14 +791,17 @@ angular.module('myApp.controllers', [])
             else
             {
 
-      if($scope.togo)
-      {
-           setTogo = "TO-GO";
-      }
+                if($scope.togo)
+                {
+                    setTogo = "TO-GO";
+                }
+                if($scope.sms){
+                    setSms = true;
+                }
 
                 // -5 in date construction string represents GMT -5 (Eastern Standard Time)
                 active_ordersRef.child(orderID).set({customer: $scope.customer, id: orderID, price: $scope.total_price, phone: '1' + $scope.phone,
-                time: new Date( new Date().getTime() - 4 * 3600 * 1000).toUTCString().replace( / GMT$/, "" ), status: "submitted", togo: setTogo })
+                    time: new Date( new Date().getTime() - 4 * 3600 * 1000).toUTCString().replace( / GMT$/, "" ), status: "submitted", togo: setTogo, sms: setSms})
 
 
                 angular.forEach($scope.current_order,function(item,index)
@@ -709,14 +809,22 @@ angular.module('myApp.controllers', [])
                     active_ordersRef.child(orderID).child('ITEM').child(index +1).set({name: item.name, special: item.special, class: item.class, side: item.side});
                 })
 
+                if(setSms){
+                    smsQ_Ref.child(orderID).set({customer: $scope.customer, id: orderID, price: $scope.total_price, phone: '1' + $scope.phone,
+                        time: new Date( new Date().getTime() - 4 * 3600 * 1000).toUTCString().replace( / GMT$/, "" ), status: "submitted", togo: setTogo, sms: setSms})
+                }
+
                 lastOrderIDRef.set(orderID);
                 $scope.total_price= 0.00;
                 $scope.current_order = [ ];
                 $scope.customer = "";
                 $scope.phone = "";
 
-            $scope.togo ="";
-            setTogo="";
+                $scope.togo ="";
+                setTogo="";
+
+                $scope.sms ="";
+                setSms = "";
 
             }
         }

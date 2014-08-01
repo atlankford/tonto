@@ -1,0 +1,48 @@
+<div ng-controller="WaitlistCtrl">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-1">
+                <br>
+                <br>
+
+                <div class="fill text-center">
+                    <h2 id="time" class="text-danger time"></h2>
+
+                </div>
+                <br>
+                <br>
+
+                <label>Name</label>
+                <input type="text" class="form-control" ng-model="name">
+                <label>Party Size</label>
+                <input type="number" class="form-control" ng-model="partySize">
+                <label>Telephone</label>
+                <input type="tel" class="form-control" ng-model="tel">
+                <br>
+                <button class="btn-success btn-large fill" ng-click="add(name, partySize, tel)">Add</button>
+                <br>
+
+
+            </div>
+            <div class="col-md-4 col-md-offset-2" >
+                <div class="list-group"  >
+                    <br>
+                    <a ng-repeat="(key,party) in waitingList"  ng-swipe-right="deleteItem(key)" class="list-group-item food media" href="" >
+
+                        <div class="media-body">
+                            <div class="pull-right text-info">
+                                {{party.size}}
+                            </div>
+                            <h4 class="media-heading text-success">{{party.name}} </h4>
+                            <small>
+                                <span class="pull-right text-primary">{{party.time}}</span>
+                            </small>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- page script -->
+
+</div>

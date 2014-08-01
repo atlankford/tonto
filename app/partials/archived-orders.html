@@ -1,36 +1,52 @@
-<div ng-include="'partials/navbar.html'"></div>
-<div ng-controller="ArchiveCtrl">
- <div class="archive-table">
-     <div class="table table-responsive">
-      <table >
-         <thead>
-         <th class="archive-table-col">Order ID</th>
-         <th class="archive-table-col">Customer</th>
-         <th class="archive-table-col">Time In</th>
-         <th class="archive-table-col">Time Out</th>
-         <th class="archive-table-col">Items</th>
-         <th class="archive-table-col">Recall?</th>
-         </thead>
 
-
-         <tr ng-repeat="row in archiveItems | orderBy: row.id:reverse | limitTo: 20">
-             <td class="archive-table-col">{{row.id}}</td>
-             <td class="archive-table-col">{{row.customer}}</td>
-             <td class="archive-table-col">{{row.time_submitted}}</td>
-             <td class="archive-table-col">{{row.time_served}}</td>
-             <td class="archive-table-col">
-                 <ol>
-                     <li ng-repeat="i in row.ITEM" ng-if="$index != 0">{{i.name}} // {{i.side}} <p ng-if="i.side != ''"> {{i.special}}</p></li>
-                 </ol>
-             </td>
-             <td class="order-item-delete archive-table-col"><button class="btn  btn-lg btn-success" ng-click="archiveItem(key,item)"><i class="fa fa-external-link"></i></button></td>
-         </tr>
-
-          </table>
-     </div>
-
-
-
- </div>
-
+<!-- Sidebars -->
+<div class="sidebar sidebar-left" toggleable parent-active-class="sidebar-left-in" id="mainSidebar">
+    <div class="scrollable">
+        <div class="scrollable-content">
+            <div class="list-group" toggle="off" bubble target="mainSidebar">
+                <div ng-include="'partials/sidebar.html'"></div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div class="app" >
+    <!-- Navbars -->
+    <div class="navbar navbar-app navbar-absolute-top">
+
+        <div class="navbar-brand navbar-brand-center">
+            <span><img src="img/logos/logo-white2.png" width="190px"> </span>
+        </div>
+
+        <div class="btn-group pull-left">
+            <div ng-click="toggle('mainSidebar')" class="btn btn-navbar sidebar-toggle">
+                <i class="fa fa-tachometer"></i> Dashboard
+            </div>
+        </div>
+
+        <div class="btn-group pull-right">
+            <div class="btn btn-navbar">
+                <a href="#/order"> <i class="fa fa-plus"></i> New Order </a>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="navbar navbar-app navbar-absolute-bottom" ng-controller="AccountCtrl">-->
+        <!--<div class="btn-group justified">-->
+            <!--<a ng-click="logout()" class="btn btn-navbar btn-icon-only"><i class="fa fa-power-off"></i></a>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <div class="app-body">
+        <div class="app-content">
+            <div class="scrollable">
+                <div class="scrollable-content">
+                    <div ng-include="'partials/archived-orders-view.html'"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,28 @@
+
+
+<div ng-controller="CustomerViewCtrl">
+<div class="container">
+    <br>
+    <div class="col-lg-6 col-md-6 text-center" >
+        <h2 class="customer-header text-primary">Orders being Prepared</h2>
+
+        <div class="row" ng-repeat="order in orders">
+            <div class="col-md-12 col-lg-12">
+               <p class="customer-item text-info text-center"> {{order.customer}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6 col-md-6 text-center">
+        <h2 class="customer-header text-primary">Orders Ready</h2>
+        <div class="row" >
+            <div class="col-md-12 col-lg-12" >
+                <p class="customer-item text-success text-center" ng-repeat="order in archiveItems  | reverse">{{order.customer}}</p>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <a href="#/dashboard.html" class="menu-back-button"><i class="fa fa-tachometer"></i></a>
+</div>

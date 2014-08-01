@@ -1,0 +1,47 @@
+
+<!-- Sidebars -->
+<div class="sidebar sidebar-left" toggleable parent-active-class="sidebar-left-in" id="mainSidebar">
+    <div class="scrollable">
+        <div class="scrollable-content">
+            <div class="list-group" toggle="off" bubble target="mainSidebar">
+                <div ng-include="'partials/sidebar.html'"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="app" >
+    <!-- Navbars -->
+    <div class="navbar navbar-app navbar-absolute-top">
+
+        <div class="navbar-brand navbar-brand-center">
+             <span><img src="img/logos/logo-white2.png" width="190px"> </span>
+        </div>
+
+        <div class="btn-group pull-left">
+            <div ng-click="toggle('mainSidebar')" class="btn btn-navbar sidebar-toggle">
+                <i class="fa fa-tachometer"></i> Dashboard
+            </div>
+        </div>
+
+        <div class="btn-group pull-right">
+            <div class="btn btn-navbar">
+                <a href="#/order"> <i class="fa fa-plus"></i> New Order </a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="app-body">
+        <div class="app-content">
+            <div class="scrollable">
+                <div class="scrollable-content">
+                    <div ng-include="'partials/waitlist-view.html'"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

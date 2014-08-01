@@ -1,120 +1,52 @@
 
-<div ng-include="'partials/navbar.html'"></div>
+<!-- Sidebars -->
+<div class="sidebar sidebar-left" toggleable parent-active-class="sidebar-left-in" id="mainSidebar">
+    <div class="scrollable">
+        <div class="scrollable-content">
+            <div class="list-group" toggle="off" bubble target="mainSidebar">
+                <div ng-include="'partials/sidebar.html'"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<div ng-controller="EditMenuCtrl" class="edit-menu">
-    <!--<div class="row">-->
-    <!--<table class="edit-menu">-->
-    <!--<tr ng-repeat="(key,menuItem) in menu">-->
-    <!--<td> <input ng-model="menuItem.name" class="edit-name"/></td>-->
-    <!--<td> <input ng-model="menuItem.description" class="edit-description"/></td>-->
-    <!--<td> <input ng-model="menuItem.price" class="edit-price"/></td>-->
-    <!--<td class="order-item-delete pull-right"><button class="btn btn-danger" ng-click="deleteItem(key)"><i class="fa fa-trash-o"></i></button></td>-->
+<div class="app" ng-swipe-right="toggle('mainSidebar')">
+    <!-- Navbars -->
+    <div class="navbar navbar-app navbar-absolute-top">
 
-    <!--</tr>-->
-    <!--<tr>-->
-    <!--<td> <input ng-model="newMenuItem.name" class="edit-name" placeholder="add new item name"/></td>-->
-    <!--<td> <input ng-model="newMenuItem.description" class="edit-description" placeholder="add new item description"/></td>-->
-    <!--<td> <input ng-model="newMenuItem.price" class="edit-price" placeholder="add new item price"/></td>-->
-    <!--<td class="order-item-special pull-right"><button class="btn btn-success" ng-click="addItem()"><i class="fa fa-plus"></i></button> </td>-->
-    <!--</tr>-->
-    <!--</table>-->
+        <div class="navbar-brand navbar-brand-center">
+            <span><img src="img/logos/logo-white2.png" width="190px"> </span>
+        </div>
+
+        <div class="btn-group pull-left">
+            <div ng-click="toggle('mainSidebar')" class="btn btn-navbar sidebar-toggle">
+                <i class="fa fa-tachometer"></i> Dashboard
+            </div>
+        </div>
+
+        <div class="btn-group pull-right">
+            <div class="btn btn-navbar">
+                <a href="#/order"> <i class="fa fa-plus"></i> New Order </a>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="navbar navbar-app navbar-absolute-bottom" ng-controller="AccountCtrl">-->
+        <!--<div class="btn-group justified">-->
+            <!--<a ng-click="logout()" class="btn btn-navbar btn-icon-only"><i class="fa fa-power-off"></i></a>-->
+        <!--</div>-->
     <!--</div>-->
 
-    <!--<select  class="form-control"  ng-options="x.name as x.name for x in menu"></select>-->
-
-
-
-    <accordion close-others="oneAtATime">
-
-        <accordion-group  heading="{{menuItem.name}}" ng-repeat="(key,menuItem) in menu">
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>Name</h5>
-                    <input ng-model="menuItem.name" class="edit-name"/>
-                </div>
-                <div class="col-md-6">
-                    <h5>Description</h5>
-                    <input ng-model="menuItem.description" class="edit-description"/>
+    <div class="app-body">
+        <div class="app-content">
+            <div class="scrollable">
+                <div class="scrollable-content">
+                    <div ng-include="'partials/edit-menu-view.html'"></div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>Price</h5>
-                    <input ng-model="menuItem.price" class="edit-price"/>
-                </div>
-                <div class="col-md-6">
-                    <h5>Category</h5>
-                    <input ng-model="menuItem.category" class="edit-category"/><br>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>Style Class</h5>
-                    <input ng-model="menuItem.class" class="edit-class"/>
-                </div>
-                <div class="col-md-6">
-                    <h5>Font Awesome Icon</h5>
-                    <input ng-model="menuItem.icon" class="edit-icon"/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>Shortname</h5>
-                    <input ng-model="menuItem.shortname" class="edit-shortname"/>
-                </div>
-                <div class="col-md-6">
-                    <h5 >Delete Menu Item?</h5>
-                    <button class="btn btn-danger pull-right" ng-click="deleteItem(key)"><i class="fa fa-trash-o">Delete?</i></button>
-                </div>
-            </div>
-
-        </accordion-group>
-        <accordion-group heading="Add New Item">
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>Name</h5>
-                    <input ng-model="newMenuItem.name" class="edit-name"/>
-                </div>
-                <div class="col-md-6">
-                    <h5>Description</h5>
-                    <input ng-model="newMenuItem.description" class="edit-description"/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>Price</h5>
-                    <input ng-model="newMenuItem.price" class="edit-price"/>
-                </div>
-                <div class="col-md-6">
-                    <h5>Category</h5>
-                    <input ng-model="newMenuItem.category" class="edit-category"/><br>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>Style Class</h5>
-                    <input ng-model="newMenuItem.class" class="edit-class"/>
-                </div>
-                <div class="col-md-6">
-                    <h5>Font Awesome Icon</h5>
-                    <input ng-model="newMenuItem.icon" class="edit-icon"/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>Shortname</h5>
-                    <input ng-model="newMenuItem.shortname" class="edit-shortname"/>
-                </div>
-                <div class="col-md-6">
-                    <h5 >Add</h5>
-                    <button class="btn btn-success pull-right" ng-click="addItem()"><i class="fa fa-plus"></i>Add?</button>
-                </div>
-            </div>
-
-        </accordion-group>
-
-    </accordion>
-
-
-
+        </div>
+    </div>
 </div>
+
+
+

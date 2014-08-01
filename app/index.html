@@ -20,35 +20,44 @@
     <link href="img/icons/144.png" sizes="144x144" rel="apple-touch-icon">
 
     <!-- iPhone SPLASHSCREEN-->
-    <link href="img/splash/320P.jpg" media="(device-width: 320px)" rel="apple-touch-startup-image">
+    <link href="img/splash/320.png" media="(device-width: 320px)" rel="apple-touch-startup-image">
     <!-- iPhone (Retina) SPLASHSCREEN-->
-    <link href="img/splash/640P.jpg" media="(device-width: 320px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+    <link href="img/splash/768.png" media="(device-width: 320px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
     <!-- iPad (portrait) SPLASHSCREEN-->
-    <link href="img/splash/768P.jpg" media="(device-width: 768px) and (orientation: portrait)" rel="apple-touch-startup-image">
+    <link href="img/splash/768.png" media="(device-width: 768px) and (orientation: portrait)" rel="apple-touch-startup-image">
     <!-- iPhone 5(Retina) SPLASHSCREEN-->
-    <link href="img/splash/640P@2x.jpg" rel="apple-touch-startup-image" sizes="640x1096">
+    <link href="img/splash/768.png" rel="apple-touch-startup-image" sizes="640x1096">
     <!-- iPad (landscape) SPLASHSCREEN-->
-    <link href="img/splash/1024L.jpg" media="(device-width: 768px) and (orientation: landscape)" rel="apple-touch-startup-image">
+    <link href="img/splash/1024.png" media="(device-width: 768px) and (orientation: landscape)" rel="apple-touch-startup-image">
     <!-- iPad (Retina, portrait) SPLASHSCREEN-->
-    <link href="img/splash/1536L.jpg" media="(device-width: 1536px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+    <link href="img/splash/1536.png" media="(device-width: 1536px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
     <!-- iPad (Retina, landscape) SPLASHSCREEN-->
-    <link href="img/splash/2048L.jpg" media="(device-width: 1536px)  and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+    <link href="img/splash/2048.png" media="(device-width: 1536px)  and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
     <!--end web app graphics-->
 
-    <link rel="stylesheet" href="css/app.css"/>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Monoton' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Covered+By+Your+Grace' rel='stylesheet' type='text/css'>
+    <!--<link href='http://fonts.googleapis.com/css?family=Monoton' rel='stylesheet' type='text/css'>-->
+    <!--<link href='http://fonts.googleapis.com/css?family=Covered+By+Your+Grace' rel='stylesheet' type='text/css'>-->
     <link rel="stylesheet" href="css/override.css"/>
     <script src="https://cdn.firebase.com/v0/firebase.js"></script>
     <script src="https://cdn.firebase.com/v0/firebase-simple-login.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-route.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-touch.js"></script>
+
     <script src="https://cdn.firebase.com/libs/angularfire/0.6.0/angularfire.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
     <script src="js/vendor/jquery.novacancy.min.js"></script>
+    <link rel="stylesheet" href="bower_components/mobile-angular-ui/dist/css/mobile-angular-ui-base.css">
+    <link rel="stylesheet" href="bower_components/mobile-angular-ui/dist/css/mobile-angular-ui-desktop.css">
+    <link rel="stylesheet" href="css/app.css"/>
+    <link rel="stylesheet" href="css/theme.css"/>
+
+
+    <script src="bower_components/mobile-angular-ui/dist/js/mobile-angular-ui.js">
+    </script>
 
     <script src="js/app.js"></script>
     <script src="js/config.js"></script>
@@ -66,8 +75,49 @@
 </head>
 <body ng-cloak>
 
+<div ng-view class="fill"> </div>
+<script type="text/javascript">
+    $(function() {
+        startTime();
+    });
 
-<div ng-view></div>
+    /*  */
+    function startTime()
+    {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+
+        // add a zero in front of numbers<10
+        m = checkTime(m);
+        s = checkTime(s);
+
+        //Check for PM and AM
+        var day_or_night = (h > 11) ? "PM" : "AM";
+
+        //Convert to 12 hours system
+        if (h > 12)
+            h -= 12;
+        //add [+ ":" + s] after m to add seconds
+        //Add time to the headline and update every 500 milliseconds
+        $('#time').html(h + ":" + m  + " " + day_or_night);
+        setTimeout(function() {
+            startTime()
+        }, 500);
+    }
+
+    function checkTime(i)
+    {
+        if (i < 10)
+        {
+            i = "0" + i;
+        }
+        return i;
+    }
+
+</script>
+
 
 </body>
 </html>

@@ -1,0 +1,118 @@
+<div ng-controller="ArchiveCtrl">
+
+    <!--<br><br><br>-->
+    <!--<div id="carousel-example" class="carousel">-->
+        <!--<div class="carousel-inner" >-->
+            <!--<div href="" class="item active" carousel-example-item ng-repeat="row in archiveItems">-->
+                <!--<div class="carousel-example-content" >-->
+                    <!--<div class="archived-ticket" >-->
+                        <!--<div class="row">-->
+                            <!--<div class="col-md-6 col-sm-6 emph">-->
+                                <!--<strong>{{row.id}}</strong>-->
+                            <!--</div>-->
+                            <!--<div class="col-md-6 col-sm-6 text-primary">-->
+                                <!--<span ng-if="row.togo">{{row.togo}}</span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="row">-->
+                            <!--<div class="col-md-12 ">-->
+                                <!--<span class="emph"> {{row.customer}}</span>-->
+                              <!--<span ng-if="row.phone != '1undefined'"> {{row.phone}}-->
+                                <!--</span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                        <!--<div class="row">-->
+                            <!--<div class="col-md-6 col-sm-6">-->
+                                <!--<span class="emph">In: </span>{{row.time_submitted}}-->
+                            <!--</div>-->
+                            <!--<div class="col-md-6 col-sm-6">-->
+                                <!--<span class="emph">Out: </span> {{row.time_served}}-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<hr>-->
+                        <!--<div ng-repeat="i in row.ITEM" ng-if="$index != 0">-->
+                            <!--<div class="row">-->
+                                <!--<div class="col-md-6 col-sm-6 ">-->
+                                    <!--{{$index}}). {{i.name}} &nbsp; {{i.side}}-->
+                                <!--</div>-->
+                            <!--<div class="col-md-6 col-sm-6  text-danger">-->
+                                <!--{{i.special}}-->
+                            <!--</div>-->
+                            <!--</div>-->
+
+
+
+                        <!--</div>-->
+                        <!--<div class="row">-->
+                            <!--<div class="col-lg-10 col-md-10 col-sm-10 text-right text-info">-->
+                                <!--${{row.price}}-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="archive-table">
+        <div class="table table-responsive fill">
+        <table class="fill">
+        <thead class="text-primary">
+        <th class="archive-table-col">Order ID</th>
+        <th class="archive-table-col">Customer</th>
+        <th class="archive-table-col">Time</th>
+        <!--<th class="archive-table-col">Time Out</th>-->
+        <th class="archive-table-col">Phone</th>
+        <th class="archive-table-col">Items</th>
+        <!--<th class="archive-table-col">Recall?</th>-->
+        </thead>
+
+
+        <tr ng-repeat="row in archiveItems | orderBy: row.id:reverse | limitTo: 20">
+        <td class="archive-table-col">{{row.id}}</td>
+        <td class="archive-table-col">{{row.customer}}</td>
+        <td class="archive-table-col"><span class="text-success">IN: {{row.time_submitted}}</span><span class="text-danger"> <br> OUT: {{row.time_served}}</span></td>
+        <!--<td class="archive-table-col">{{row.time_served}}</td>-->
+        <td class="archive-table-col">{{row.phone}}</td>
+
+        <td class="archive-table-col">
+        <ol>
+        <li ng-repeat="i in row.ITEM" ng-if="$index != 0">{{i.name}} // {{i.side}} <p ng-if="i.side != ''"> {{i.special}}</p></li>
+        </ol>
+        </td>
+        <!--<td class="order-item-delete archive-table-col"><button class="btn  btn-lg btn-success" ng-click="archiveItem(key,item)"><i class="fa fa-external-link"></i></button></td>-->
+        </tr>
+
+        </table>
+        </div>
+
+
+
+        </div>
+
+    </div>

@@ -1,21 +1,19 @@
-<div ng-controller="LoginCtrl">
-    <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">OrderUpp</a>
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav pull-right">
-                    <li ng-show-auth="'login'"><a href="#/dashboard"><i class="fa fa-dashboard"></i>&#160;Dashboard</a></li>
-                </ul>
-            </div><!--/.nav-collapse -->
+
+<div class="navbar navbar-app navbar-absolute-top"  ng-controller="LoginCtrl">
+
+    <div class="navbar-brand navbar-brand-center">
+        <a  href="#">OrderUpp</a>
+    </div>
+
+    <div class="btn-group pull-left">
+        <div class="btn btn-navbar">
+            Left Action
+        </div>
+    </div>
+
+    <div class="btn-group pull-right">
+        <div class="btn btn-navbar">
+            <li ng-show-auth="'login'"><a href="#/dashboard"><i class="fa fa-dashboard"></i>&#160;Dashboard</a></li>
         </div>
     </div>
 </div>

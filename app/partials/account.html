@@ -1,63 +1,51 @@
 
-<div ng-include="'partials/navbar.html'"></div>
-
-<div ng-controller="AccountCtrl" class="account container">
-
-    <form role="form">
-        <div class="col-md-4 col-lg-4">
-            <fieldset>
-                <h3>Update User Info</h3>
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" type="text" id="name" name="name" ng-model="user.name" placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="Password">Email</label>
-                    <input type="text" class="form-control" ng-model="user.email" id="Password" placeholder="user.email">
-                </div>
-                <button class="btn btn-danger " ng-click="logout()">Log Out</button>
-            </fieldset>
-
+<!-- Sidebars -->
+<div class="sidebar sidebar-left" toggleable parent-active-class="sidebar-left-in" id="mainSidebar">
+    <div class="scrollable">
+        <div class="scrollable-content">
+            <div class="list-group" toggle="off" bubble target="mainSidebar">
+                <div ng-include="'partials/sidebar.html'"></div>
+            </div>
         </div>
-        <div class="col-md-4 col-lg-4">
-            <fieldset>
-                <h3>Change Password</h3>
-                <p class="error" ng-show="err">{{err}}</p>
-                <p class="good" ng-show="msg">{{msg}}</p>
-                <div class="form-group">
-                    <label for="Password">Old Password</label>
-                    <input class="form-control" type="password" ng-keypress="reset()" ng-model="oldpass"/>
-                </div>
-                <div class="form-group">
-                    <label for="Password">New Password</label>
-                    <input  class="form-control" type="password" ng-keypress="reset()" ng-model="newpass"/>
-                </div>
-                <div class="form-group">
-                    <label for="Password">Confirm New Password</label>
-                    <input  class="form-control" type="password" ng-keypress="reset()" ng-model="confirm"/>
-                </div>
-                <button class="btn btn-success" ng-click="updatePassword()">Update Password</button>
-            </fieldset>
-        </div>
-        <div class="col-md-4 col-lg-4">
-            <fieldset>
-                <h3>Change Email</h3>
-                <p class="error" ng-show="emailerr">{{emailerr}}</p>
-                <p class="good" ng-show="emailmsg">{{emailmsg}}</p>
-                <div class="form-group">
-                    <label for="Password">New Email</label>
-                    <input  class="form-control" type="email" ng-keypress="reset()" ng-model="newemail"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="Password">Password</label>
-                    <input  class="form-control" type="password" ng-keypress="reset()" ng-model="pass"/>
-                </div>
-                <button class="btn btn-success" ng-click="updateEmail()">Update Email</button>
-            </fieldset>
-        </div>
-
-    </form>
-
-
+    </div>
 </div>
+
+<div class="app">
+    <!-- Navbars -->
+    <div class="navbar navbar-app navbar-absolute-top">
+
+        <div class="navbar-brand navbar-brand-center">
+            <span>Orderupp</span>
+        </div>
+
+        <div class="btn-group pull-left">
+            <div ng-click="toggle('mainSidebar')" class="btn btn-navbar sidebar-toggle">
+                <i class="fa fa-tachometer"></i> Dashboard
+            </div>
+        </div>
+
+        <div class="btn-group pull-right">
+            <div class="btn btn-navbar">
+                <a href="#/order"> <i class="fa fa-plus"></i> New Order </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="navbar navbar-app navbar-absolute-bottom" ng-controller="AccountCtrl">
+        <div class="btn-group justified">
+            <a ng-click="logout()" class="btn btn-navbar btn-icon-only"><i class="fa fa-power-off"></i></a>
+        </div>
+    </div>
+    <div class="app-body">
+        <div class="app-content">
+            <div class="scrollable">
+                <div class="scrollable-content">
+                    <div ng-include="'partials/account-view.html'"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

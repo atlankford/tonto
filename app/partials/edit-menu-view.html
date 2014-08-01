@@ -1,0 +1,95 @@
+<div ng-controller="EditMenuCtrl" class="edit-menu">
+      <accordion close-others="oneAtATime">
+
+        <accordion-group  heading="{{menuItem.name}}" ng-repeat="(key,menuItem) in menu">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Name</h5>
+                    <input ng-model="menuItem.name" class="edit-name"/>
+                </div>
+                <div class="col-md-6">
+                    <h5>Description</h5>
+                    <input ng-model="menuItem.description" class="edit-description"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Price</h5>
+                    <input ng-model="menuItem.price" class="edit-price"/>
+                </div>
+                <div class="col-md-6">
+                    <h5>Category</h5>
+                    <input ng-model="menuItem.category" class="edit-category"/><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Style Class</h5>
+                    <input ng-model="menuItem.class" class="edit-class"/>
+                </div>
+                <div class="col-md-6">
+                    <h5>Font Awesome Icon</h5>
+                    <input ng-model="menuItem.icon" class="edit-icon"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Shortname</h5>
+                    <input ng-model="menuItem.shortname" class="edit-shortname"/>
+                </div>
+                <div class="col-md-6">
+                    <h5 >Delete Menu Item?</h5>
+                    <button class="btn btn-danger pull-right" ng-click="deleteItem(key)"><i class="fa fa-trash-o">Delete?</i></button>
+                </div>
+            </div>
+
+        </accordion-group>
+        <accordion-group heading="Add New Item">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Name</h5>
+                    <input ng-model="newMenuItem.name" class="edit-name"/>
+                </div>
+                <div class="col-md-6">
+                    <h5>Description</h5>
+                    <input ng-model="newMenuItem.description" class="edit-description"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Price</h5>
+                    <input ng-model="newMenuItem.price" class="edit-price"/>
+                </div>
+                <div class="col-md-6">
+                    <h5>Category</h5>
+                    <input ng-model="newMenuItem.category" class="edit-category"/><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Style Class</h5>
+                    <input ng-model="newMenuItem.class" class="edit-class"/>
+                </div>
+                <div class="col-md-6">
+                    <h5>Font Awesome Icon</h5>
+                    <input ng-model="newMenuItem.icon" class="edit-icon"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Shortname</h5>
+                    <input ng-model="newMenuItem.shortname" class="edit-shortname"/>
+                </div>
+                <div class="col-md-6">
+                    <h5 >Add</h5>
+                    <button class="btn btn-success pull-right" ng-click="addItem()"><i class="fa fa-plus"></i>Add?</button>
+                </div>
+            </div>
+
+        </accordion-group>
+
+    </accordion>
+
+
+
+</div>
