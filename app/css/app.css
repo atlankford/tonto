@@ -706,8 +706,12 @@ a.food:hover{
 }
 
 .time{
+    width: 100%;
+    text-align: center;
     font-family: lcd;
     font-size: 42pt;
+    position: fixed;
+    bottom: 5px;
 }
 
 .panel-body{
