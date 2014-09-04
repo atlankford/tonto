@@ -660,6 +660,12 @@ text-align: right;
 .yellow{
     color: #FDFF3A;
 }
+.blue{
+    color: #2143bf;
+}
+.white{
+    color: #ffffff;
+}
 
 
 .archive-table{
@@ -717,3 +723,5 @@ a.food:hover{
 .panel-body{
     background-color: #f9f9f9;
 }
+
+

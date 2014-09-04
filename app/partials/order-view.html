@@ -3,14 +3,14 @@
     <div class="container fill">
 
         <div class="col-md-7 col-lg-7 col-sm-7 col-xs-7 " ng-swipe-right="toggle('mainSidebar')">
-            <div class="menu-item-container" ng-repeat="menuItem in menu">
+            <div class="menu-item-container" ng-repeat="menuItem in menu | orderBy: $index">
                 <a class="btn btn-primary menu-item" ng-click="addItem(menuItem)" ng-model="menuItem">
                     <i class="{{menuItem.icon}} fa-2x"></i><br> {{menuItem.shortname}}</a>
             </div>
         </div>
         <div class="col-md-5 col-lg-5 col-sm-5 col-xs-5 current-order-container">
             <div class="btn-group justified nav-tabs">
-                <a class="btn btn-default active oreder-tab" href="#Tab1" toggle="on" active-class="active">Items
+                <a class="btn btn-default active order-tab" href="#Tab1" toggle="on" active-class="active">Items
                 </a>
 
                 <a class="btn btn-default" href="#Tab2" toggle="on" active-class="active">Customer
